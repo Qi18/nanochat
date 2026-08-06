@@ -158,3 +158,5 @@ num_iterations = target_tokens // total_batch_size
 - 固定 kernel revision，避免正式训练启动时跟随 Hub main 漂移。
 
 修复后 20 项 FA3/SDPA GPU 回归通过。d24 探针为 1.384B 参数、16 次梯度累积，稳态约 5.17 秒/step，峰值分配显存 17.9 GiB/rank；3-step checkpoint 的模型约 3.94 GiB，每份 optimizer shard 约 684 MiB。
+
+正式 horizon 只使用 `transformer_matrices + lm_head` 作为 scaling params，即 729,810,624，而不是总参数 1,384,122,122。因此 ratio=8 对应 11,136 step 和 5,838,471,168 个实际训练 token。

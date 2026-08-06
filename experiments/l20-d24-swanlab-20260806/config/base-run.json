@@ -1,0 +1,22 @@
+{
+  "status": "running",
+  "started_at_utc": "2026-08-06T14:54:54Z",
+  "git_commit": "3126420e9662c87e299b6cf4c65398b5b8936696",
+  "swanlab_mode": "offline",
+  "swanlab_run_id": "thapegmb",
+  "world_size": 8,
+  "dtype": "bfloat16",
+  "attention_backend": "flash_attention_3",
+  "kernel_revision": "9542c462013476380ce4b395b9ddc0e8118161ee",
+  "model_parameters": 1384122122,
+  "scaling_parameters": 729810624,
+  "target_param_data_ratio": 8,
+  "iterations": 11136,
+  "training_tokens": 5838471168,
+  "total_batch_tokens": 524288,
+  "gradient_accumulation_steps": 16,
+  "initial_validation_bpb": 3.160318,
+  "observed_steady_step_seconds": [5.19710, 5.18254],
+  "estimated_training_hours": 16.0,
+  "estimated_wall_clock_hours": "17-19"
+}

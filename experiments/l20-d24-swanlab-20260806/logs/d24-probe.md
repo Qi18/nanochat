@@ -44,9 +44,10 @@ Attempt 2 通过。8×L20、BF16、FA3、d24、正式 total batch 的 3-step 训
 
 ## 正式训练估算
 
-- ratio=8 对应 21,120 step、11,072,962,560 token。
-- 纯训练按 5.17 秒/step 约 30.3 小时。
-- 加上 validation、CORE、sample 与 checkpoint，预计 31–33 小时。
+- NanoChat 使用 `transformer_matrices + lm_head` 作为 scaling params，共 729,810,624。
+- ratio=8 实际对应 11,136 step、5,838,471,168 token。
+- 纯训练按 5.17 秒/step 约 16.0 小时。
+- 加上 validation、CORE、sample 与 checkpoint，预计 17–19 小时。
 
 ## 产物哈希
 

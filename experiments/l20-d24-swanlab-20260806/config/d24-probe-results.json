@@ -22,10 +22,11 @@
   "peak_allocated_memory_mib": 17889.30,
   "formal_estimate": {
     "target_param_data_ratio": 8,
-    "iterations": 21120,
-    "tokens": 11072962560,
-    "training_hours": 30.3,
-    "wall_clock_hours": "31-33"
+    "scaling_parameters": 729810624,
+    "iterations": 11136,
+    "tokens": 5838471168,
+    "training_hours": 16.0,
+    "wall_clock_hours": "17-19"
   },
   "swanlab_run_id": "0spgv31a",
   "sha256": {

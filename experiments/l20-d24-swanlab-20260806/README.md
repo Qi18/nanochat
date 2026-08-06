@@ -12,7 +12,7 @@ NanoChat 在 8×NVIDIA L20 上的当前代码基线复现实验，使用 SwanLab
 - [x] 固化 provenance
 - [x] 数据与 tokenizer
 - [x] 100-step checkpoint 恢复冒烟
-- [ ] d24 Base
+- [ ] d24 Base（运行中：11,136 step）
 - [ ] Base Eval
 - [ ] SFT
 - [ ] RL
@@ -26,7 +26,7 @@ NanoChat 在 8×NVIDIA L20 上的当前代码基线复现实验，使用 SwanLab
 - step 50 与 step 100 均有模型、metadata 和 8 份 optimizer state。
 - 两个 SwanLab 离线 run 已落盘，等待 L20 完成安全登录后同步。
 - 对齐 `kernels==0.11.7` 并修复 Torch 2.6 graph-break/tuple 兼容后，FA3 GPU 回归 20 项通过。
-- d24 正式 batch 探针稳态约 5.17 秒/step、峰值分配显存 17.9 GiB/rank，预计正式 Base 约 31–33 小时。
+- d24 正式 batch 探针稳态约 5.17 秒/step、峰值分配显存 17.9 GiB/rank；正式 Base 预计约 17–19 小时。
 - 详细证据见 [logs/smoke-attempt-2.md](logs/smoke-attempt-2.md)。
 
 ## 不可变约束
