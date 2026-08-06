@@ -19,7 +19,7 @@ PROVENANCE_FILE="${EXPERIMENT_DIR}/config/provenance.json"
     python -c 'import torch, swanlab, wandb, rustbpe, kernels; print("torch", torch.__version__, "cuda", torch.version.cuda); print("swanlab", swanlab.__version__); print("wandb", wandb.__version__); x=torch.ones(1024, device="cuda"); print("gpu_count", torch.cuda.device_count(), "cuda_sum", x.sum().item())'
     nvidia-smi --query-gpu=index,name,memory.total,driver_version --format=csv,noheader
     df -h /data /dev/shm
-    torchrun --standalone --nproc_per_node=8 "${SCRIPT_DIR}/nccl_smoke.py"
+    python -m torch.distributed.run --standalone --nproc_per_node=8 "${SCRIPT_DIR}/nccl_smoke.py"
     curl -L -sS -I -o /dev/null --connect-timeout 10 --max-time 30 -w 'dataset_mirror_http=%{http_code}\n' "${NANOCHAT_DATASET_BASE_URL}/shard_00000.parquet"
     git ls-remote origin "refs/heads/${EXPERIMENT_BRANCH}"
 } 2>&1 | tee "${LOG_FILE}"

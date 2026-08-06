@@ -25,11 +25,32 @@ COMMON_ARGS=(
     "--swanlab-tags=${NANOCHAT_SWANLAB_TAGS},smoke"
 )
 
-torchrun --standalone --nproc_per_node=8 -m scripts.base_train -- +    "${COMMON_ARGS[@]}" +    "--num-iterations=${SMOKE_FIRST_STOP}" +    "--run=${EXPERIMENT_ID}-smoke-a" +    2>&1 | tee "${EXPERIMENT_RUNTIME_DIR}/smoke-a.log"
+smoke_a_command=(
+    python -m torch.distributed.run
+    --standalone
+    --nproc_per_node=8
+    -m scripts.base_train
+    --
+    "${COMMON_ARGS[@]}"
+    "--num-iterations=${SMOKE_FIRST_STOP}"
+    "--run=${EXPERIMENT_ID}-smoke-a"
+)
+"${smoke_a_command[@]}" 2>&1 | tee "${EXPERIMENT_RUNTIME_DIR}/smoke-a.log"
 
 test -f "${NANOCHAT_BASE_DIR}/base_checkpoints/${SMOKE_MODEL_TAG}/model_000050.pt"
 
-torchrun --standalone --nproc_per_node=8 -m scripts.base_train -- +    "${COMMON_ARGS[@]}" +    "--num-iterations=${SMOKE_FINAL_STOP}" +    "--resume-from-step=${SMOKE_FIRST_STOP}" +    "--run=${EXPERIMENT_ID}-smoke-resume" +    2>&1 | tee "${EXPERIMENT_RUNTIME_DIR}/smoke-resume.log"
+smoke_resume_command=(
+    python -m torch.distributed.run
+    --standalone
+    --nproc_per_node=8
+    -m scripts.base_train
+    --
+    "${COMMON_ARGS[@]}"
+    "--num-iterations=${SMOKE_FINAL_STOP}"
+    "--resume-from-step=${SMOKE_FIRST_STOP}"
+    "--run=${EXPERIMENT_ID}-smoke-resume"
+)
+"${smoke_resume_command[@]}" 2>&1 | tee "${EXPERIMENT_RUNTIME_DIR}/smoke-resume.log"
 
 test -f "${NANOCHAT_BASE_DIR}/base_checkpoints/${SMOKE_MODEL_TAG}/model_000100.pt"
 echo "8-GPU smoke and checkpoint resume complete"
