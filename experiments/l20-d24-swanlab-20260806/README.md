@@ -10,7 +10,7 @@ NanoChat 在 8×NVIDIA L20 上的当前代码基线复现实验，使用 SwanLab
 - [x] SwanLab/W&B/rustbpe/kernels 隔离环境
 - [x] Hugging Face 直连与镜像验证
 - [x] 固化 provenance
-- [ ] 数据与 tokenizer
+- [x] 数据与 tokenizer
 - [ ] 100-step checkpoint 恢复冒烟
 - [ ] d24 Base
 - [ ] Base Eval

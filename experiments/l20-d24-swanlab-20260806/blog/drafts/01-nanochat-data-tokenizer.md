@@ -71,4 +71,11 @@ targets:    [B, T]
 
 这说明 32K 小词表在当前训练域中接近 GPT-4 tokenizer，并明显优于 GPT-2 的代码压缩，但多语言能力仍受词表容量和训练数据影响。
 
-仍需回填的数据包括：171 个 shard 的实际体积、Tokenizer 文件 SHA256，以及 checkpoint 恢复前后的 dataloader state。这些结果将来自 GitHub 的 `data_manifest.json` 和训练 checkpoint 元数据，而不是手工估算。
+完整数据最终包含 170 个 train shard 和 1 个 validation shard，CPFS 占用约 15GB；下载结束后没有缺失 shard或残留 `.tmp`。
+
+Tokenizer 文件也已固定：
+
+- `tokenizer.pkl` SHA256：`387cfc082b0bee45467774fd6f1310a922ad170886a58ccddcb468f275e06a6c`
+- `token_bytes.pt` SHA256：`ea2ed770d0f77f8e8c82477bbcbabb8056c3d3a72a7ed29a599726838835aa8a`
+
+剩余待验证项是 checkpoint 恢复前后的 dataloader state，它将在 50→100 step 冒烟中检查。

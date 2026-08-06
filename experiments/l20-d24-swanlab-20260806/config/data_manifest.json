@@ -1,0 +1,706 @@
+{
+  "captured_at": "2026-08-06T14:17:10.376237+00:00",
+  "dataset_base_url": "https://hf-mirror.com/datasets/karpathy/climbmix-400b-shuffle/resolve/main",
+  "data_dir": "/data/cache/nanochat/base_data_climbmix",
+  "shard_count": 171,
+  "shard_listing_sha256": "155a9c73c3fe2341373b4bfd9795cd530f13ea0dab071cf7401d71fd2ae841cb",
+  "shards": [
+    {
+      "name": "shard_00000.parquet",
+      "size_bytes": 92291918
+    },
+    {
+      "name": "shard_00001.parquet",
+      "size_bytes": 92124317
+    },
+    {
+      "name": "shard_00002.parquet",
+      "size_bytes": 91803619
+    },
+    {
+      "name": "shard_00003.parquet",
+      "size_bytes": 91793972
+    },
+    {
+      "name": "shard_00004.parquet",
+      "size_bytes": 91428652
+    },
+    {
+      "name": "shard_00005.parquet",
+      "size_bytes": 91845922
+    },
+    {
+      "name": "shard_00006.parquet",
+      "size_bytes": 91455616
+    },
+    {
+      "name": "shard_00007.parquet",
+      "size_bytes": 91202032
+    },
+    {
+      "name": "shard_00008.parquet",
+      "size_bytes": 91155507
+    },
+    {
+      "name": "shard_00009.parquet",
+      "size_bytes": 92072356
+    },
+    {
+      "name": "shard_00010.parquet",
+      "size_bytes": 92181541
+    },
+    {
+      "name": "shard_00011.parquet",
+      "size_bytes": 91758078
+    },
+    {
+      "name": "shard_00012.parquet",
+      "size_bytes": 91531067
+    },
+    {
+      "name": "shard_00013.parquet",
+      "size_bytes": 91842434
+    },
+    {
+      "name": "shard_00014.parquet",
+      "size_bytes": 91794786
+    },
+    {
+      "name": "shard_00015.parquet",
+      "size_bytes": 91642426
+    },
+    {
+      "name": "shard_00016.parquet",
+      "size_bytes": 91875697
+    },
+    {
+      "name": "shard_00017.parquet",
+      "size_bytes": 92252148
+    },
+    {
+      "name": "shard_00018.parquet",
+      "size_bytes": 92097325
+    },
+    {
+      "name": "shard_00019.parquet",
+      "size_bytes": 91468190
+    },
+    {
+      "name": "shard_00020.parquet",
+      "size_bytes": 92023878
+    },
+    {
+      "name": "shard_00021.parquet",
+      "size_bytes": 92007015
+    },
+    {
+      "name": "shard_00022.parquet",
+      "size_bytes": 91895569
+    },
+    {
+      "name": "shard_00023.parquet",
+      "size_bytes": 91788901
+    },
+    {
+      "name": "shard_00024.parquet",
+      "size_bytes": 91816001
+    },
+    {
+      "name": "shard_00025.parquet",
+      "size_bytes": 92082140
+    },
+    {
+      "name": "shard_00026.parquet",
+      "size_bytes": 91646155
+    },
+    {
+      "name": "shard_00027.parquet",
+      "size_bytes": 91534737
+    },
+    {
+      "name": "shard_00028.parquet",
+      "size_bytes": 92205715
+    },
+    {
+      "name": "shard_00029.parquet",
+      "size_bytes": 91416996
+    },
+    {
+      "name": "shard_00030.parquet",
+      "size_bytes": 91557375
+    },
+    {
+      "name": "shard_00031.parquet",
+      "size_bytes": 91761076
+    },
+    {
+      "name": "shard_00032.parquet",
+      "size_bytes": 91797604
+    },
+    {
+      "name": "shard_00033.parquet",
+      "size_bytes": 91448157
+    },
+    {
+      "name": "shard_00034.parquet",
+      "size_bytes": 91977442
+    },
+    {
+      "name": "shard_00035.parquet",
+      "size_bytes": 91501064
+    },
+    {
+      "name": "shard_00036.parquet",
+      "size_bytes": 91493685
+    },
+    {
+      "name": "shard_00037.parquet",
+      "size_bytes": 91950930
+    },
+    {
+      "name": "shard_00038.parquet",
+      "size_bytes": 91681390
+    },
+    {
+      "name": "shard_00039.parquet",
+      "size_bytes": 91480777
+    },
+    {
+      "name": "shard_00040.parquet",
+      "size_bytes": 91501658
+    },
+    {
+      "name": "shard_00041.parquet",
+      "size_bytes": 91995895
+    },
+    {
+      "name": "shard_00042.parquet",
+      "size_bytes": 91400837
+    },
+    {
+      "name": "shard_00043.parquet",
+      "size_bytes": 91490600
+    },
+    {
+      "name": "shard_00044.parquet",
+      "size_bytes": 91090081
+    },
+    {
+      "name": "shard_00045.parquet",
+      "size_bytes": 91188024
+    },
+    {
+      "name": "shard_00046.parquet",
+      "size_bytes": 91600459
+    },
+    {
+      "name": "shard_00047.parquet",
+      "size_bytes": 92007753
+    },
+    {
+      "name": "shard_00048.parquet",
+      "size_bytes": 91791765
+    },
+    {
+      "name": "shard_00049.parquet",
+      "size_bytes": 91330275
+    },
+    {
+      "name": "shard_00050.parquet",
+      "size_bytes": 91234778
+    },
+    {
+      "name": "shard_00051.parquet",
+      "size_bytes": 92016071
+    },
+    {
+      "name": "shard_00052.parquet",
+      "size_bytes": 91529024
+    },
+    {
+      "name": "shard_00053.parquet",
+      "size_bytes": 91473476
+    },
+    {
+      "name": "shard_00054.parquet",
+      "size_bytes": 91396912
+    },
+    {
+      "name": "shard_00055.parquet",
+      "size_bytes": 91320632
+    },
+    {
+      "name": "shard_00056.parquet",
+      "size_bytes": 91400250
+    },
+    {
+      "name": "shard_00057.parquet",
+      "size_bytes": 91313283
+    },
+    {
+      "name": "shard_00058.parquet",
+      "size_bytes": 91911182
+    },
+    {
+      "name": "shard_00059.parquet",
+      "size_bytes": 91555652
+    },
+    {
+      "name": "shard_00060.parquet",
+      "size_bytes": 91524191
+    },
+    {
+      "name": "shard_00061.parquet",
+      "size_bytes": 91823199
+    },
+    {
+      "name": "shard_00062.parquet",
+      "size_bytes": 91669638
+    },
+    {
+      "name": "shard_00063.parquet",
+      "size_bytes": 92138204
+    },
+    {
+      "name": "shard_00064.parquet",
+      "size_bytes": 92027475
+    },
+    {
+      "name": "shard_00065.parquet",
+      "size_bytes": 91610871
+    },
+    {
+      "name": "shard_00066.parquet",
+      "size_bytes": 91782288
+    },
+    {
+      "name": "shard_00067.parquet",
+      "size_bytes": 91627031
+    },
+    {
+      "name": "shard_00068.parquet",
+      "size_bytes": 91582958
+    },
+    {
+      "name": "shard_00069.parquet",
+      "size_bytes": 92094808
+    },
+    {
+      "name": "shard_00070.parquet",
+      "size_bytes": 91276778
+    },
+    {
+      "name": "shard_00071.parquet",
+      "size_bytes": 91527354
+    },
+    {
+      "name": "shard_00072.parquet",
+      "size_bytes": 91171991
+    },
+    {
+      "name": "shard_00073.parquet",
+      "size_bytes": 91820849
+    },
+    {
+      "name": "shard_00074.parquet",
+      "size_bytes": 92038597
+    },
+    {
+      "name": "shard_00075.parquet",
+      "size_bytes": 91542457
+    },
+    {
+      "name": "shard_00076.parquet",
+      "size_bytes": 91480315
+    },
+    {
+      "name": "shard_00077.parquet",
+      "size_bytes": 91215695
+    },
+    {
+      "name": "shard_00078.parquet",
+      "size_bytes": 92297727
+    },
+    {
+      "name": "shard_00079.parquet",
+      "size_bytes": 92302344
+    },
+    {
+      "name": "shard_00080.parquet",
+      "size_bytes": 91755139
+    },
+    {
+      "name": "shard_00081.parquet",
+      "size_bytes": 91953019
+    },
+    {
+      "name": "shard_00082.parquet",
+      "size_bytes": 91511623
+    },
+    {
+      "name": "shard_00083.parquet",
+      "size_bytes": 91837292
+    },
+    {
+      "name": "shard_00084.parquet",
+      "size_bytes": 91390849
+    },
+    {
+      "name": "shard_00085.parquet",
+      "size_bytes": 91447629
+    },
+    {
+      "name": "shard_00086.parquet",
+      "size_bytes": 92098233
+    },
+    {
+      "name": "shard_00087.parquet",
+      "size_bytes": 91340825
+    },
+    {
+      "name": "shard_00088.parquet",
+      "size_bytes": 91228987
+    },
+    {
+      "name": "shard_00089.parquet",
+      "size_bytes": 92064537
+    },
+    {
+      "name": "shard_00090.parquet",
+      "size_bytes": 92048118
+    },
+    {
+      "name": "shard_00091.parquet",
+      "size_bytes": 91811974
+    },
+    {
+      "name": "shard_00092.parquet",
+      "size_bytes": 91820437
+    },
+    {
+      "name": "shard_00093.parquet",
+      "size_bytes": 92020735
+    },
+    {
+      "name": "shard_00094.parquet",
+      "size_bytes": 91468677
+    },
+    {
+      "name": "shard_00095.parquet",
+      "size_bytes": 92057617
+    },
+    {
+      "name": "shard_00096.parquet",
+      "size_bytes": 92136374
+    },
+    {
+      "name": "shard_00097.parquet",
+      "size_bytes": 91616098
+    },
+    {
+      "name": "shard_00098.parquet",
+      "size_bytes": 92137123
+    },
+    {
+      "name": "shard_00099.parquet",
+      "size_bytes": 91360745
+    },
+    {
+      "name": "shard_00100.parquet",
+      "size_bytes": 92030208
+    },
+    {
+      "name": "shard_00101.parquet",
+      "size_bytes": 91223597
+    },
+    {
+      "name": "shard_00102.parquet",
+      "size_bytes": 91907524
+    },
+    {
+      "name": "shard_00103.parquet",
+      "size_bytes": 91457455
+    },
+    {
+      "name": "shard_00104.parquet",
+      "size_bytes": 91496905
+    },
+    {
+      "name": "shard_00105.parquet",
+      "size_bytes": 91956808
+    },
+    {
+      "name": "shard_00106.parquet",
+      "size_bytes": 91690455
+    },
+    {
+      "name": "shard_00107.parquet",
+      "size_bytes": 92143932
+    },
+    {
+      "name": "shard_00108.parquet",
+      "size_bytes": 92045558
+    },
+    {
+      "name": "shard_00109.parquet",
+      "size_bytes": 91474944
+    },
+    {
+      "name": "shard_00110.parquet",
+      "size_bytes": 91725399
+    },
+    {
+      "name": "shard_00111.parquet",
+      "size_bytes": 91978492
+    },
+    {
+      "name": "shard_00112.parquet",
+      "size_bytes": 91671514
+    },
+    {
+      "name": "shard_00113.parquet",
+      "size_bytes": 91586387
+    },
+    {
+      "name": "shard_00114.parquet",
+      "size_bytes": 91858796
+    },
+    {
+      "name": "shard_00115.parquet",
+      "size_bytes": 91573477
+    },
+    {
+      "name": "shard_00116.parquet",
+      "size_bytes": 91654881
+    },
+    {
+      "name": "shard_00117.parquet",
+      "size_bytes": 92170361
+    },
+    {
+      "name": "shard_00118.parquet",
+      "size_bytes": 92029626
+    },
+    {
+      "name": "shard_00119.parquet",
+      "size_bytes": 91733735
+    },
+    {
+      "name": "shard_00120.parquet",
+      "size_bytes": 92138415
+    },
+    {
+      "name": "shard_00121.parquet",
+      "size_bytes": 91671876
+    },
+    {
+      "name": "shard_00122.parquet",
+      "size_bytes": 91482449
+    },
+    {
+      "name": "shard_00123.parquet",
+      "size_bytes": 91230975
+    },
+    {
+      "name": "shard_00124.parquet",
+      "size_bytes": 91317127
+    },
+    {
+      "name": "shard_00125.parquet",
+      "size_bytes": 92253123
+    },
+    {
+      "name": "shard_00126.parquet",
+      "size_bytes": 91884928
+    },
+    {
+      "name": "shard_00127.parquet",
+      "size_bytes": 92081811
+    },
+    {
+      "name": "shard_00128.parquet",
+      "size_bytes": 91562328
+    },
+    {
+      "name": "shard_00129.parquet",
+      "size_bytes": 91515220
+    },
+    {
+      "name": "shard_00130.parquet",
+      "size_bytes": 92033034
+    },
+    {
+      "name": "shard_00131.parquet",
+      "size_bytes": 91853766
+    },
+    {
+      "name": "shard_00132.parquet",
+      "size_bytes": 91477443
+    },
+    {
+      "name": "shard_00133.parquet",
+      "size_bytes": 91503346
+    },
+    {
+      "name": "shard_00134.parquet",
+      "size_bytes": 91680807
+    },
+    {
+      "name": "shard_00135.parquet",
+      "size_bytes": 92048956
+    },
+    {
+      "name": "shard_00136.parquet",
+      "size_bytes": 91972305
+    },
+    {
+      "name": "shard_00137.parquet",
+      "size_bytes": 91988749
+    },
+    {
+      "name": "shard_00138.parquet",
+      "size_bytes": 91458690
+    },
+    {
+      "name": "shard_00139.parquet",
+      "size_bytes": 91189945
+    },
+    {
+      "name": "shard_00140.parquet",
+      "size_bytes": 91404193
+    },
+    {
+      "name": "shard_00141.parquet",
+      "size_bytes": 91956652
+    },
+    {
+      "name": "shard_00142.parquet",
+      "size_bytes": 90998299
+    },
+    {
+      "name": "shard_00143.parquet",
+      "size_bytes": 91263468
+    },
+    {
+      "name": "shard_00144.parquet",
+      "size_bytes": 91632293
+    },
+    {
+      "name": "shard_00145.parquet",
+      "size_bytes": 92094713
+    },
+    {
+      "name": "shard_00146.parquet",
+      "size_bytes": 91631957
+    },
+    {
+      "name": "shard_00147.parquet",
+      "size_bytes": 91577857
+    },
+    {
+      "name": "shard_00148.parquet",
+      "size_bytes": 91510406
+    },
+    {
+      "name": "shard_00149.parquet",
+      "size_bytes": 92209889
+    },
+    {
+      "name": "shard_00150.parquet",
+      "size_bytes": 92107518
+    },
+    {
+      "name": "shard_00151.parquet",
+      "size_bytes": 91288627
+    },
+    {
+      "name": "shard_00152.parquet",
+      "size_bytes": 92107913
+    },
+    {
+      "name": "shard_00153.parquet",
+      "size_bytes": 91591975
+    },
+    {
+      "name": "shard_00154.parquet",
+      "size_bytes": 91879273
+    },
+    {
+      "name": "shard_00155.parquet",
+      "size_bytes": 91627812
+    },
+    {
+      "name": "shard_00156.parquet",
+      "size_bytes": 91701780
+    },
+    {
+      "name": "shard_00157.parquet",
+      "size_bytes": 91972634
+    },
+    {
+      "name": "shard_00158.parquet",
+      "size_bytes": 91571633
+    },
+    {
+      "name": "shard_00159.parquet",
+      "size_bytes": 92152183
+    },
+    {
+      "name": "shard_00160.parquet",
+      "size_bytes": 92230059
+    },
+    {
+      "name": "shard_00161.parquet",
+      "size_bytes": 91432213
+    },
+    {
+      "name": "shard_00162.parquet",
+      "size_bytes": 92262329
+    },
+    {
+      "name": "shard_00163.parquet",
+      "size_bytes": 91631871
+    },
+    {
+      "name": "shard_00164.parquet",
+      "size_bytes": 91306308
+    },
+    {
+      "name": "shard_00165.parquet",
+      "size_bytes": 91202544
+    },
+    {
+      "name": "shard_00166.parquet",
+      "size_bytes": 91715632
+    },
+    {
+      "name": "shard_00167.parquet",
+      "size_bytes": 92083729
+    },
+    {
+      "name": "shard_00168.parquet",
+      "size_bytes": 91729460
+    },
+    {
+      "name": "shard_00169.parquet",
+      "size_bytes": 91243921
+    },
+    {
+      "name": "shard_06542.parquet",
+      "size_bytes": 91699537
+    }
+  ],
+  "tokenizer_dir": "/data/cache/nanochat/tokenizer",
+  "tokenizer_files": [
+    {
+      "name": "token_bytes.pt",
+      "size_bytes": 132252,
+      "sha256": "ea2ed770d0f77f8e8c82477bbcbabb8056c3d3a72a7ed29a599726838835aa8a"
+    },
+    {
+      "name": "tokenizer.pkl",
+      "size_bytes": 412105,
+      "sha256": "387cfc082b0bee45467774fd6f1310a922ad170886a58ccddcb468f275e06a6c"
+    }
+  ]
+}

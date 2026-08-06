@@ -88,7 +88,8 @@ targets:    [B, T]
 - 32768 词表完成 32503 次 merge，训练耗时 53.30 秒。
 - 相对 GPT-2，ours 在 code 样例的压缩率改善 31.2%，ClimbMix train/val 分别改善 1.4%/1.2%。
 - 相对 GPT-4，ours 在 ClimbMix train/val 分别低 1.8%/2.2%；Korean 样例差距最明显。
-- 完整数据 shard 数量和体积在后台下载结束后回填。
+- 完整数据为 170 个 train shard 加 1 个 validation shard，共 171 个，CPFS 占用约 15GB。
+- 下载完成后没有缺失 shard，也没有残留 `.tmp`。
 
 ## 待验证
 
