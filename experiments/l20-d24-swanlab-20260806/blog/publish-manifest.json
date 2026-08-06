@@ -2,5 +2,14 @@
   "experiment_id": "l20-d24-swanlab-20260806",
   "git_commit": null,
   "blog_platform": null,
-  "articles": []
+  "articles": [
+    {
+      "title": "NanoChat 的数据集、Tokenizer 与 DataLoader",
+      "status": "draft",
+      "source": "blog/drafts/01-nanochat-data-tokenizer.md",
+      "url": null,
+      "published_at": null,
+      "swanlab_runs": []
+    }
+  ]
 }
