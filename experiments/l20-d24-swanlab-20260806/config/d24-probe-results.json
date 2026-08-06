@@ -1,0 +1,38 @@
+{
+  "status": "passed",
+  "world_size": 8,
+  "dtype": "bfloat16",
+  "attention_backend": "flash_attention_3",
+  "kernels_version": "0.11.7",
+  "kernel_revision": "9542c462013476380ce4b395b9ddc0e8118161ee",
+  "model": {
+    "depth": 24,
+    "width": 1536,
+    "heads": 12,
+    "parameters": 1384122122,
+    "sequence_length": 2048
+  },
+  "batch": {
+    "device_batch_size": 2,
+    "total_batch_tokens": 524288,
+    "gradient_accumulation_steps": 16
+  },
+  "steady_step_seconds": [5.16494, 5.17394],
+  "steady_tokens_per_second": [101508, 101332],
+  "peak_allocated_memory_mib": 17889.30,
+  "formal_estimate": {
+    "target_param_data_ratio": 8,
+    "iterations": 21120,
+    "tokens": 11072962560,
+    "training_hours": 30.3,
+    "wall_clock_hours": "31-33"
+  },
+  "swanlab_run_id": "0spgv31a",
+  "sha256": {
+    "attempt_1_log": "abdb2129e01c7c82bfcca285c6a0d3782106da61b6adb2dcb1f36de8b4f7d22d",
+    "attempt_2_log": "6014ca951d617ed55434452b9f08cf36ad72e8841367a26b4be0a8297c02be32",
+    "metadata": "ce0f1b24abf069a2414b5d6f4da9d0494ce3d64fc94dab6fafdb85cce79290bf",
+    "model": "742bbcee137c0b86d1fe8020dcb6e5959c3f1f47aa098310ae58dcc308acfa5f",
+    "swanlab": "14003cae6e785d451ca78eb51aa61ac97f0098e2dc53ed4849d92f3b412a1a57"
+  }
+}

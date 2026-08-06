@@ -1133,7 +1133,7 @@ dev = [
 [package.metadata]
 requires-dist = [
     { name = "filelock", specifier = ">=3.19.0" },
-    { name = "kernels", specifier = ">=0.11.7" },
+    { name = "kernels", specifier = "==0.11.7" },
     { name = "numpy", specifier = ">=1.26.0" },
     { name = "psutil", specifier = ">=7.1.0" },
     { name = "pyarrow", specifier = ">=21.0.0" },

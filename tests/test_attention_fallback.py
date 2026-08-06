@@ -45,6 +45,24 @@ def assert_close(t1, t2, name, atol=1e-2, rtol=1e-2):
     return max_diff, mean_diff
 
 
+def test_fa3_training_dispatch_uses_opaque_wrapper(monkeypatch):
+    calls = []
+    q = torch.randn(1, 4, 1, 8)
+    k = torch.randn(1, 4, 1, 8)
+    v = torch.randn(1, 4, 1, 8)
+
+    monkeypatch.setattr(fa_module, "USE_FA3", True)
+    monkeypatch.setattr(
+        fa_module,
+        "_fa3_flash_attn_func",
+        lambda *args, **kwargs: calls.append((args, kwargs)) or q,
+    )
+
+    result = flash_attn.flash_attn_func(q, k, v, causal=True, window_size=(4, 0))
+    assert result is q
+    assert calls[0][1] == {"causal": True, "window_size": (4, 0)}
+
+
 # =============================================================================
 # FA3 vs SDPA comparison tests
 # =============================================================================

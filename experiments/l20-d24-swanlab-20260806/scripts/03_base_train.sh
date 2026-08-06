@@ -9,6 +9,12 @@ source "${EXPERIMENT_DIR}/config/smoke.env"
 require_clean_repo
 
 test -f "${NANOCHAT_BASE_DIR}/base_checkpoints/${SMOKE_MODEL_TAG}/model_000100.pt"
+python -c '
+import kernels
+from nanochat.flash_attention import HAS_FA3, USE_FA3
+assert kernels.__version__ == "0.11.7", kernels.__version__
+assert HAS_FA3 and USE_FA3, (HAS_FA3, USE_FA3)
+'
 
 base_command=(
     python -m torch.distributed.run

@@ -30,15 +30,16 @@ def _load_flash_attention_3():
         # Blackwell (sm100) needs SDPA fallback until FA3 is recompiled or FA4 is released
         import os
         os.environ["HF_HUB_DISABLE_PROGRESS_BARS"] = "1"
+        revision = os.environ.get("NANOCHAT_FA3_REVISION")
         from kernels import get_kernel, has_kernel
         # The varunneal kernel obtains better results for H100/Hopper
         if major == 9:
             hf_kernel = "varunneal/flash-attention-3"
-            return get_kernel(hf_kernel).flash_attn_interface
+            return get_kernel(hf_kernel, revision=revision).flash_attn_interface
         else:
             hf_kernel = "kernels-community/flash-attn3"
-            if has_kernel(hf_kernel):
-                return get_kernel(hf_kernel).flash_attn_interface
+            if has_kernel(hf_kernel, revision=revision):
+                return get_kernel(hf_kernel, revision=revision).flash_attn_interface
             else:
                 return None
 
@@ -109,6 +110,17 @@ def _sdpa_attention(q, k, v, window_size, enable_gqa):
 
     return F.scaled_dot_product_attention(q, k, v, attn_mask=mask, enable_gqa=enable_gqa)
 
+
+@torch.compiler.disable
+def _fa3_flash_attn_func(q, k, v, *, causal, window_size):
+    """Keep the legacy FA3 extension opaque to torch.compile on Torch 2.6."""
+    result = _fa3.flash_attn_func(
+        q, k, v, causal=causal, window_size=window_size
+    )
+    # Torch 2.6 builds return (output, softmax_lse); newer builds return output.
+    return result[0] if isinstance(result, tuple) else result
+
+
 # =============================================================================
 # Public API: Same interface as FA3
 # =============================================================================
@@ -125,7 +137,9 @@ def flash_attn_func(q, k, v, causal=False, window_size=(-1, -1)):
         Output tensor of shape (B, T, H, D)
     """
     if USE_FA3:
-        return _fa3.flash_attn_func(q, k, v, causal=causal, window_size=window_size)
+        # kernels 0.11.7 does not register an opaque custom op for Torch 2.6.
+        # A graph break prevents Dynamo from tracing into its pointer-based C++ op.
+        return _fa3_flash_attn_func(q, k, v, causal=causal, window_size=window_size)
 
     # SDPA fallback: transpose (B, T, H, D) -> (B, H, T, D)
     q = q.transpose(1, 2)

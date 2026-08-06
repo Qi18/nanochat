@@ -145,3 +145,16 @@ num_iterations = target_tokens // total_batch_size
 - dataloader state 从 step 50 的 `epoch=1,pq_idx=0,rg_idx=8` 前进到 step 100 的 `epoch=1,pq_idx=0,rg_idx=24`。
 - validation bpb 从 3.164625 降至 1.836842，所有已记录 loss/BPB 均为有限值。
 - `train/epoch` 原为复合字符串，SwanLab 0.9.2 拒绝该指标；现拆为 `train/epoch`、`train/pq_idx`、`train/rg_idx` 三个整数指标，并通过真实离线 run 验证。
+
+## d24 FA3 探针
+
+首次 d24 探针加载 FA3 后在 Torch 2.6 Dynamo 阶段失败。原因是预编译 kernel 的 CUDA op 没有注册为 opaque custom op，Dynamo 使用 FakeTensor 追踪到指针访问。
+
+兼容处理：
+
+- 依赖对齐到锁文件的 `kernels==0.11.7`。
+- 用 `torch.compiler.disable` 把 FA3 调用设为 graph break，避免 Dynamo 进入扩展内部。
+- 兼容 Torch 2.6 kernel 返回 `(output, softmax_lse)`、新版返回单个 output 的差异。
+- 固定 kernel revision，避免正式训练启动时跟随 Hub main 漂移。
+
+修复后 20 项 FA3/SDPA GPU 回归通过。d24 探针为 1.384B 参数、16 次梯度累积，稳态约 5.17 秒/step，峰值分配显存 17.9 GiB/rank；3-step checkpoint 的模型约 3.94 GiB，每份 optimizer shard 约 684 MiB。
