@@ -52,12 +52,23 @@ targets:    [B, T]
 
 这能避免明显重复，但不是逐 token 的完全恢复，因为内存中的 best-fit 文档 buffer 没有进入 checkpoint。
 
-## 6. 本次实验还要回填的数据
+## 6. L20 上的第一组结果
 
-- 171 个 shard 的实际体积
-- Tokenizer 训练耗时
-- 词表文件 SHA256
-- train/validation 压缩率
-- checkpoint 恢复前后的 dataloader state
+32768 词表完成 32503 次 merge，用时 53.30 秒。
 
-这些结果将来自 GitHub 的 `data_manifest.json`、训练 checkpoint 元数据和 SwanLab Run，而不是手工估算。
+相对 GPT-2：
+
+- code 样例的压缩率改善 31.2%；
+- science 改善 5.0%；
+- ClimbMix train/validation 分别改善 1.4% 和 1.2%；
+- news 略低 0.2%。
+
+相对拥有更大词表的 GPT-4 tokenizer：
+
+- ClimbMix train/validation 分别低 1.8% 和 2.2%；
+- Korean 样例差距最大；
+- science 样例略高 0.8%。
+
+这说明 32K 小词表在当前训练域中接近 GPT-4 tokenizer，并明显优于 GPT-2 的代码压缩，但多语言能力仍受词表容量和训练数据影响。
+
+仍需回填的数据包括：171 个 shard 的实际体积、Tokenizer 文件 SHA256，以及 checkpoint 恢复前后的 dataloader state。这些结果将来自 GitHub 的 `data_manifest.json` 和训练 checkpoint 元数据，而不是手工估算。

@@ -85,11 +85,12 @@ targets:    [B, T]
 - Hugging Face 官方地址在 L20 连接超时。
 - hf-mirror 对同一 shard 返回 HTTP 200 并可完整读取。
 - rustbpe 0.1.0 与当前 Python 3.10 环境可正常导入。
-- 实际 shard 数量、Tokenizer 训练耗时和压缩率在数据阶段结束后回填。
+- 32768 词表完成 32503 次 merge，训练耗时 53.30 秒。
+- 相对 GPT-2，ours 在 code 样例的压缩率改善 31.2%，ClimbMix train/val 分别改善 1.4%/1.2%。
+- 相对 GPT-4，ours 在 ClimbMix train/val 分别低 1.8%/2.2%；Korean 样例差距最明显。
+- 完整数据 shard 数量和体积在后台下载结束后回填。
 
 ## 待验证
 
-- 8 个初始 shard 是否足够稳定覆盖 20 亿字符的 tokenizer 上限。
-- Tokenizer 实际训练用到的字符数量和耗时。
-- train/validation 压缩率与 GPT-2、GPT-4 tokenizer 的差异。
+- 8 个初始 shard 是否稳定覆盖了 20 亿字符的 tokenizer 上限。
 - 50→100 step 恢复后 dataloader state 是否按预期前进。
