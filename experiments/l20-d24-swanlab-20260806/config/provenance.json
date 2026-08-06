@@ -1,0 +1,28 @@
+{
+  "experiment_id": "l20-d24-swanlab-20260806",
+  "captured_at": "2026-08-06T14:03:14.012450+00:00",
+  "git_branch": "experiment/l20-d24-swanlab-20260806",
+  "git_commit": "b19ea07f862c8809d07b73cf0180afe68a9f43aa",
+  "git_dirty": false,
+  "python": "3.10.12",
+  "torch": "2.6.0+cu124",
+  "torch_compiled_cuda": "12.4",
+  "swanlab": "0.9.2",
+  "wandb": "0.28.1",
+  "compute_dtype": "bfloat16",
+  "dataset_base_url": "https://hf-mirror.com/datasets/karpathy/climbmix-400b-shuffle/resolve/main",
+  "nanochat_base_dir": "/data/cache/nanochat",
+  "gpus": [
+    "0, NVIDIA L20, 46068 MiB, 535.161.08",
+    "1, NVIDIA L20, 46068 MiB, 535.161.08",
+    "2, NVIDIA L20, 46068 MiB, 535.161.08",
+    "3, NVIDIA L20, 46068 MiB, 535.161.08",
+    "4, NVIDIA L20, 46068 MiB, 535.161.08",
+    "5, NVIDIA L20, 46068 MiB, 535.161.08",
+    "6, NVIDIA L20, 46068 MiB, 535.161.08",
+    "7, NVIDIA L20, 46068 MiB, 535.161.08"
+  ],
+  "cuda_device_count": 8,
+  "nccl_available": true,
+  "manifest_sha256": "831c1400b25fe1a5d8c945696bb4bb1dd2701fcf0cb4aaeb8d017a7fa0da830a"
+}
