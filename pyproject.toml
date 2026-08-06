@@ -58,6 +58,9 @@ cpu = [
 gpu = [
     "torch==2.9.1",
 ]
+tracking = [
+    "swanlab>=0.8.0",
+]
 
 [tool.uv]
 default-groups = []
