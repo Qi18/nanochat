@@ -19,8 +19,15 @@ from nanochat.common import get_base_dir
 # -----------------------------------------------------------------------------
 # The specifics of the current pretraining dataset
 
-# The URL on the internet where the data is hosted and downloaded from on demand
-BASE_URL = "https://huggingface.co/datasets/karpathy/climbmix-400b-shuffle/resolve/main"
+# The URL on the internet where the data is hosted and downloaded from on demand.
+# NANOCHAT_DATASET_BASE_URL lets restricted environments use an explicit mirror.
+DEFAULT_BASE_URL = "https://huggingface.co/datasets/karpathy/climbmix-400b-shuffle/resolve/main"
+
+
+def get_dataset_base_url():
+    """Return the configured dataset endpoint without a trailing slash."""
+    return os.environ.get("NANOCHAT_DATASET_BASE_URL", DEFAULT_BASE_URL).rstrip("/")
+
 MAX_SHARD = 6542 # the last datashard is shard_06542.parquet
 index_to_filename = lambda index: f"shard_{index:05d}.parquet" # format of the filenames
 base_dir = get_base_dir()
@@ -92,7 +99,7 @@ def download_single_file(index):
         return True
 
     # Construct the remote URL for this file
-    url = f"{BASE_URL}/{filename}"
+    url = f"{get_dataset_base_url()}/{filename}"
     print(f"Downloading {filename}...")
 
     # Download with retries
