@@ -11,12 +11,22 @@ NanoChat 在 8×NVIDIA L20 上的当前代码基线复现实验，使用 SwanLab
 - [x] Hugging Face 直连与镜像验证
 - [x] 固化 provenance
 - [x] 数据与 tokenizer
-- [ ] 100-step checkpoint 恢复冒烟
+- [x] 100-step checkpoint 恢复冒烟
 - [ ] d24 Base
 - [ ] Base Eval
 - [ ] SFT
 - [ ] RL
 - [ ] 统一评测与最终报告
+
+## 最近结果
+
+- 8 卡 BF16 d6 smoke 在 step 50 保存后，从完整 checkpoint 恢复至 step 100。
+- validation bpb：3.164625（step 0）→ 1.960774（step 50）→ 1.836842（step 100）。
+- 稳态吞吐约 0.9M–1.0M token/s；峰值显存约 1.1 GiB/rank。
+- step 50 与 step 100 均有模型、metadata 和 8 份 optimizer state。
+- 两个 SwanLab 离线 run 已落盘，等待 L20 完成安全登录后同步。
+- L20 不支持当前 FA3 路径，训练自动回退 PyTorch SDPA；正式 d24 前先做容量与速度探针。
+- 详细证据见 [logs/smoke-attempt-2.md](logs/smoke-attempt-2.md)。
 
 ## 不可变约束
 

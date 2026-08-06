@@ -136,10 +136,12 @@ num_iterations = target_tokens // total_batch_size
 
 本实验 d24 设置 ratio=8、total batch=524288。实际 scaling params、iterations 和总 token 以正式启动日志为准。
 
-## 待由冒烟验证
+## 冒烟验证结果
 
-- Torch 2.6 下 `torch.compile` 是否能编译当前 GPT 和 Muon kernel。
-- d6 单卡 batch 2 的实际显存、tokens/sec 和 MFU。
-- 当前 L20 是否成功加载 FA3，还是使用 SDPA。
-- checkpoint 保存耗时和 optimizer shard 大小。
-- 恢复前后的 dataloader state 是否前进。
+- Torch 2.6 成功编译当前 GPT 和 Muon 路径，首次 step 编译约 25.6 秒；恢复进程命中部分缓存，首 step 约 6.4 秒。
+- d6、单卡 batch 2、8 卡的稳态吞吐约 0.9M–1.0M token/s，峰值显存约 1.1 GiB/rank。
+- L20 未加载 FA3，实际使用 PyTorch SDPA；MFU 因源码尚未定义 L20 峰值而显示 0，不能据此判断利用率。
+- 模型文件约 184.5 MiB，每份 optimizer shard 约 42.2 MiB。
+- dataloader state 从 step 50 的 `epoch=1,pq_idx=0,rg_idx=8` 前进到 step 100 的 `epoch=1,pq_idx=0,rg_idx=24`。
+- validation bpb 从 3.164625 降至 1.836842，所有已记录 loss/BPB 均为有限值。
+- `train/epoch` 原为复合字符串，SwanLab 0.9.2 拒绝该指标；现拆为 `train/epoch`、`train/pq_idx`、`train/rg_idx` 三个整数指标，并通过真实离线 run 验证。

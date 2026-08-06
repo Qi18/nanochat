@@ -5,6 +5,19 @@ from nanochat.common import DummyWandb
 from nanochat import experiment_tracking
 
 
+def test_dataloader_tracking_metrics_are_scalar_only():
+    state = {"epoch": 1, "pq_idx": 2, "rg_idx": 24, "unused": "ignored"}
+
+    metrics = experiment_tracking.dataloader_tracking_metrics(state)
+
+    assert metrics == {
+        "train/epoch": 1,
+        "train/pq_idx": 2,
+        "train/rg_idx": 24,
+    }
+    assert all(type(value) is int for value in metrics.values())
+
+
 def test_tracking_defaults_to_disabled(monkeypatch):
     monkeypatch.delenv("NANOCHAT_SWANLAB_MODE", raising=False)
     parser = ArgumentParser()

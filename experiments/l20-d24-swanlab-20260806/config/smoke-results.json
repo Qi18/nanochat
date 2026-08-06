@@ -1,0 +1,41 @@
+{
+  "status": "passed",
+  "started_from_commit": "ec3b4408e7b3d41cc18f6360fab54087ca380410",
+  "world_size": 8,
+  "dtype": "bfloat16",
+  "attention_backend": "pytorch_sdpa",
+  "model": {
+    "depth": 6,
+    "parameters": 73531538,
+    "sequence_length": 2048
+  },
+  "batch": {
+    "device_batch_size": 2,
+    "total_batch_tokens": 65536,
+    "gradient_accumulation_steps": 2
+  },
+  "validation_bpb": {
+    "step_0": 3.164625,
+    "step_25": 2.224372,
+    "step_50": 1.960774,
+    "step_75": 1.871712,
+    "step_100": 1.836842
+  },
+  "checkpoint_files_per_step": {
+    "model": 1,
+    "metadata": 1,
+    "optimizer_shards": 8
+  },
+  "dataloader_state": {
+    "step_50": {"epoch": 1, "pq_idx": 0, "rg_idx": 8},
+    "step_100": {"epoch": 1, "pq_idx": 0, "rg_idx": 24}
+  },
+  "swanlab_run_ids": ["tnw0wi71", "895fo3n5"],
+  "sha256": {
+    "supervisor_log": "e0ed1c60949f6b7ecd91a97b476ea3b41cd80815b49832cc15efcdedc9989944",
+    "model_step_50": "82540becc1bd890b1973c195c5482f7ef73257d983c020f64eef8b671b2648d2",
+    "model_step_100": "cb5f0e53dad8db98410b923fd8d8970a9827afe448e0262fa549df60607f1b36",
+    "swanlab_step_0_50": "83ef31b5b130adba0cbea975a700514fbf1fc0b940f500dcb2d1db6af46ec2e8",
+    "swanlab_step_50_100": "5ba085993283d27e6532e7cbe4be187ebb16f4e87a98f189d3b146b070f97d2c"
+  }
+}

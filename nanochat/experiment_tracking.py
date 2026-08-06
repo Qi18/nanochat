@@ -12,6 +12,15 @@ from nanochat.common import DummyWandb, print0
 SWANLAB_MODES = ("disabled", "online", "local", "offline")
 
 
+def dataloader_tracking_metrics(state: dict) -> dict[str, int]:
+    """Return scalar-only dataloader metrics accepted by W&B and SwanLab."""
+    return {
+        "train/epoch": int(state["epoch"]),
+        "train/pq_idx": int(state["pq_idx"]),
+        "train/rg_idx": int(state["rg_idx"]),
+    }
+
+
 def add_tracking_args(parser: argparse.ArgumentParser) -> None:
     """Add shared W&B/SwanLab options to a training argument parser."""
     parser.add_argument(
