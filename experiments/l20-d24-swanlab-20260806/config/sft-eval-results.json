@@ -1,0 +1,93 @@
+{
+  "status": "completed",
+  "model_tag": "d24-l20-swanlab-20260806",
+  "checkpoint_step": 932,
+  "world_size": 8,
+  "dtype": "bfloat16",
+  "chat_eval": {
+    "started_at_utc": "2026-08-07T12:36:08Z",
+    "completed_at_utc": "2026-08-07T12:44:14Z",
+    "attention_backend": "pytorch_sdpa",
+    "batch_size": 8,
+    "num_samples": 1,
+    "max_new_tokens": 512,
+    "temperature": 0.0,
+    "top_k": 50,
+    "max_problems": null,
+    "results": {
+      "ARC-Easy": {
+        "correct": 1240,
+        "total": 2376,
+        "accuracy": 0.521885521886
+      },
+      "ARC-Challenge": {
+        "correct": 436,
+        "total": 1172,
+        "accuracy": 0.372013651877
+      },
+      "MMLU": {
+        "correct": 4841,
+        "total": 14042,
+        "accuracy": 0.344751459906
+      },
+      "GSM8K": {
+        "correct": 42,
+        "total": 1319,
+        "accuracy": 0.031842304776
+      },
+      "HumanEval": {
+        "correct": 23,
+        "total": 164,
+        "accuracy": 0.140243902439
+      },
+      "ChatCORE": 0.164724077088
+    },
+    "swanlab_run_id": "i239hpv4",
+    "swanlab_run_url": "https://swanlab.cn/@richliu0153/nanochat-lab/runs/i239hpv4",
+    "raw_log": "/data/cache/nanochat/experiments/l20-d24-swanlab-20260806/sft-eval.log",
+    "raw_log_sha256": "aa3b72c3461f4475e022e7f17efdf7847407f4cac67b2e1b971e61b6e4706807",
+    "swanlab_log_sha256": "ae76e1627d36428f4b0b2e54199d469c8b78499851a583ce3fabd9d24b3501f8"
+  },
+  "base_protocol_eval": {
+    "started_at_utc": "2026-08-07T12:51:08Z",
+    "completed_at_utc": "2026-08-07T13:03:38Z",
+    "attention_backend": "flash_attention_3",
+    "eval_modes": [
+      "sample",
+      "bpb",
+      "core"
+    ],
+    "device_batch_size": 2,
+    "split_tokens": 20971520,
+    "max_per_task": -1,
+    "sft": {
+      "train_bpb": 0.858575,
+      "val_bpb": 0.857091,
+      "core": 0.227166
+    },
+    "base": {
+      "checkpoint_step": 11136,
+      "train_bpb": 0.714492,
+      "val_bpb": 0.712537,
+      "core": 0.259960
+    },
+    "delta": {
+      "train_bpb": 0.144083,
+      "train_bpb_relative_percent": 20.1658,
+      "val_bpb": 0.144554,
+      "val_bpb_relative_percent": 20.2872,
+      "core": -0.032794,
+      "core_relative_percent": -12.6150,
+      "tasks_improved": 6,
+      "tasks_unchanged": 1,
+      "tasks_decreased": 15
+    },
+    "swanlab_run_id": "ln0ha6dv",
+    "swanlab_run_url": "https://swanlab.cn/@richliu0153/nanochat-lab/runs/ln0ha6dv",
+    "raw_log": "/data/cache/nanochat/experiments/l20-d24-swanlab-20260806/sft-base-protocol-eval.log",
+    "raw_csv": "/data/cache/nanochat/base_eval/sft_model_000932.csv",
+    "raw_log_sha256": "986d28cd8cf4e6396a0cfa1e6860d928f5c64183c94be2fd710a9b8eb06163b8",
+    "raw_csv_sha256": "37a13f2dd204e0bfa5abd7870474f79c1bbbc75cf0efdf6de755ccf7856dbcea",
+    "swanlab_log_sha256": "4f0154de2230e5e21a282a8e680c40b8ef8ec27c169d6acc268f7dd4c4946a3e"
+  }
+}

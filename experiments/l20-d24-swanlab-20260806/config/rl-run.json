@@ -1,0 +1,49 @@
+{
+  "status": "completed",
+  "started_at_utc": "2026-08-08T03:21:20Z",
+  "completed_at_utc": "2026-08-08T05:24:26Z",
+  "source_model_tag": "d24-l20-swanlab-20260806-sft-v2-lr02",
+  "source_checkpoint_step": 932,
+  "output_model_tag": "d24-l20-swanlab-20260806-rl-gsm8k",
+  "world_size": 8,
+  "dtype": "bfloat16",
+  "training_attention_backend": "flash_attention_3",
+  "eval_attention_backend": "pytorch_sdpa",
+  "task": "GSM8K",
+  "num_epochs": 1,
+  "num_steps": 467,
+  "num_samples": 16,
+  "max_new_tokens": 256,
+  "temperature": 1.0,
+  "top_k": 50,
+  "eval_every": 60,
+  "eval_examples": 400,
+  "save_every": 60,
+  "checkpoints": [60, 120, 180, 240, 300, 360, 420, 466],
+  "training_metrics": {
+    "step_0_pass_at_1": 0.0125,
+    "step_120_pass_at_1": 0.135,
+    "step_120_pass_at_8": 0.2775,
+    "step_420_pass_at_1": 0.145,
+    "step_420_pass_at_8": 0.2525,
+    "final_step_466_reward": 0.19140625
+  },
+  "swanlab": {
+    "training_run_url": "https://swanlab.cn/@richliu0153/nanochat-lab/runs/6u1qttsi",
+    "eval_run_url": "https://swanlab.cn/@richliu0153/nanochat-lab/runs/7v4ta558",
+    "offline_local_dir": "/data/cache/swanlab/l20-d24-swanlab-20260806/run-20260808_032124-i8pafru3",
+    "training_local_run_id": "i8pafru3"
+  },
+  "evaluation": {
+    "chat_eval_logs": [
+      "logs/rl-chat-eval-step420.log",
+      "logs/rl-chat-eval-step466.log"
+    ],
+    "base_protocol_logs": [
+      "logs/rl-base-eval-step420.log",
+      "logs/rl-base-eval-step466.log"
+    ],
+    "chat_eval_csv": "logs/rl-chat-eval.csv",
+    "base_protocol_csv": "logs/rl-base-protocol.csv"
+  }
+}

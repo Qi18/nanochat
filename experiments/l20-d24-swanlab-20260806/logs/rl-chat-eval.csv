@@ -1,0 +1,13 @@
+model_tag,step,task,accuracy,correct,total
+d24-l20-swanlab-20260806-rl-gsm8k,420,ARC-Easy,0.5976,1420,2376
+d24-l20-swanlab-20260806-rl-gsm8k,420,ARC-Challenge,0.4377,513,1172
+d24-l20-swanlab-20260806-rl-gsm8k,420,MMLU,0.3615,5076,14042
+d24-l20-swanlab-20260806-rl-gsm8k,420,GSM8K,0.1471,194,1319
+d24-l20-swanlab-20260806-rl-gsm8k,420,HumanEval,0.0366,6,164
+d24-l20-swanlab-20260806-rl-gsm8k,420,ChatCORE,0.2092,,
+d24-l20-swanlab-20260806-rl-gsm8k,466,ARC-Easy,0.5989,1423,2376
+d24-l20-swanlab-20260806-rl-gsm8k,466,ARC-Challenge,0.4377,513,1172
+d24-l20-swanlab-20260806-rl-gsm8k,466,MMLU,0.3613,5073,14042
+d24-l20-swanlab-20260806-rl-gsm8k,466,GSM8K,0.1418,187,1319
+d24-l20-swanlab-20260806-rl-gsm8k,466,HumanEval,0.0366,6,164
+d24-l20-swanlab-20260806-rl-gsm8k,466,ChatCORE,0.2084,,

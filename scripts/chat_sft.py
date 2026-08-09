@@ -20,6 +20,7 @@ from nanochat.experiment_tracking import add_tracking_args, init_experiment_trac
 from nanochat.tokenizer import get_token_bytes
 from nanochat.checkpoint_manager import save_checkpoint, load_model, load_optimizer_state
 from nanochat.loss_eval import evaluate_bpb
+from nanochat.dataloader import tokenizing_distributed_data_loader_bos_bestfit
 import torch.distributed as dist
 from nanochat.flash_attention import HAS_FA3
 from nanochat.engine import Engine
@@ -40,6 +41,7 @@ parser.add_argument("--device-type", type=str, default="", help="cuda|cpu|mps (e
 # Model loading
 parser.add_argument("--model-tag", type=str, default=None, help="model tag to load from")
 parser.add_argument("--model-step", type=int, default=None, help="model step to load from")
+parser.add_argument("--output-model-tag", type=str, default=None, help="separate output tag (default: reuse --model-tag)")
 parser.add_argument("--load-optimizer", type=int, default=1, help="warm-start optimizer from pretrained checkpoint (0=no, 1=yes)")
 # Training horizon
 parser.add_argument("--num-iterations", type=int, default=-1, help="number of optimization steps (-1 = full epoch)")
@@ -61,6 +63,11 @@ parser.add_argument("--eval-tokens", type=int, default=40*524288, help="number o
 parser.add_argument("--chatcore-every", type=int, default=200, help="evaluate ChatCORE metric every N steps (-1 = disable)")
 parser.add_argument("--chatcore-max-cat", type=int, default=-1, help="max problems per categorical task for ChatCORE")
 parser.add_argument("--chatcore-max-sample", type=int, default=24, help="max problems per generative task for ChatCORE")
+parser.add_argument("--base-eval-every", type=int, default=-1, help="evaluate Base validation BPB every N steps (-1 = disable)")
+parser.add_argument("--base-eval-tokens", type=int, default=524288, help="number of Base validation tokens for retention monitoring")
+# Checkpointing
+parser.add_argument("--checkpoint-every", type=int, default=-1, help="save an intermediate checkpoint every N steps (-1 = final only)")
+parser.add_argument("--save-intermediate-optimizer", type=int, default=0, help="save optimizer shards for intermediate checkpoints")
 # Data mixture
 parser.add_argument("--mmlu-epochs", type=int, default=3, help="number of epochs of MMLU in training mixture (teaches Multiple Choice)")
 parser.add_argument("--gsm8k-epochs", type=int, default=4, help="number of epochs of GSM8K in training mixture (teaches Math and Tool Use)")
@@ -266,17 +273,21 @@ def sft_data_generator_bos_bestfit(split, buffer_size=100):
             mask_rows.append(mask_row[:row_capacity])
 
         # Stopping condition to respect num_iterations, if given
+        # `it` counts yielded microbatches, while --num-iterations counts optimizer
+        # steps. Account for gradient accumulation and the one prefetched batch.
         it += 1
-        if 0 < args.num_iterations <= it and split == "train":
-            last_step = True
 
         # Update progress tracking (based on consumed, not cursor, to account for buffering)
         if split == "train":
             current_epoch = epoch
             if args.num_iterations > 0:
-                approx_progress = it / args.num_iterations
+                target_microsteps = args.num_iterations * grad_accum_steps
+                completed_microsteps = max(0, it - 1)
+                approx_progress = min(completed_microsteps / target_microsteps, 1.0)
+                if completed_microsteps >= target_microsteps:
+                    last_step = True
             else:
-                approx_progress = consumed / dataset_size
+                approx_progress = min(consumed / dataset_size, 1.0)
             # Trigger last_step when we've consumed enough (instead of when cursor wraps)
             if consumed >= dataset_size:
                 last_step = True
@@ -328,6 +339,7 @@ def get_muon_momentum(it):
 # Training loop
 x, y = next(train_loader) # prefetch the very first batch of data
 min_val_bpb = float("inf")
+last_base_val_bpb = None
 smooth_train_loss = 0 # EMA of training loss
 ema_beta = 0.9 # EMA decay factor
 total_training_time = 0 # total wall-clock time of training
@@ -355,6 +367,32 @@ while True:
             "total_training_flops": flops_so_far,
             "total_training_time": total_training_time,
             "val/bpb": val_bpb,
+        })
+        model.train()
+
+    # Monitor retention on the original Base validation distribution. This is
+    # intentionally separate from the SFT validation mixture above.
+    if args.base_eval_every > 0 and (last_step or step % args.base_eval_every == 0):
+        model.eval()
+        base_val_loader = tokenizing_distributed_data_loader_bos_bestfit(
+            tokenizer,
+            args.device_batch_size,
+            args.max_seq_len,
+            "val",
+            device=device,
+        )
+        base_eval_steps = args.base_eval_tokens // (
+            args.device_batch_size * args.max_seq_len * ddp_world_size
+        )
+        if base_eval_steps <= 0:
+            raise ValueError("--base-eval-tokens is too small for one distributed evaluation step")
+        last_base_val_bpb = evaluate_bpb(model, base_val_loader, base_eval_steps, token_bytes)
+        print0(f"Step {step:05d} | Base validation bpb: {last_base_val_bpb:.4f}")
+        wandb_run.log({
+            "step": step,
+            "total_training_flops": flops_so_far,
+            "total_training_time": total_training_time,
+            "val/base_bpb": last_base_val_bpb,
         })
         model.train()
 
@@ -393,18 +431,22 @@ while True:
         })
         model.train()
 
-    # save checkpoint at the end of the run (all ranks participate so each saves its optimizer shard)
-    if last_step:
-        output_dirname = args.model_tag if args.model_tag else f"d{depth}" # e.g. d12
+    # Save model-only intermediate checkpoints for Pareto selection. The final
+    # checkpoint remains fully resumable and includes all optimizer shards.
+    save_intermediate = args.checkpoint_every > 0 and step > 0 and step % args.checkpoint_every == 0
+    if last_step or save_intermediate:
+        output_dirname = args.output_model_tag or args.model_tag or f"d{depth}"
         checkpoint_dir = os.path.join(base_dir, "chatsft_checkpoints", output_dirname)
+        optimizer_data = optimizer.state_dict() if (last_step or args.save_intermediate_optimizer) else None
         save_checkpoint(
             checkpoint_dir,
             step,
             orig_model.state_dict(),
-            optimizer.state_dict(),
+            optimizer_data,
             {
                 "step": step,
                 "val_bpb": val_bpb, # loss at last step
+                "base_val_bpb": last_base_val_bpb,
                 "model_config": {
                     "sequence_len": args.max_seq_len,
                     "vocab_size": tokenizer.get_vocab_size(),

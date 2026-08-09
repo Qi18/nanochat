@@ -1,0 +1,3 @@
+model_tag,step,train_bpb,val_bpb,core
+d24-l20-swanlab-20260806-rl-gsm8k,420,0.951394,0.949457,0.258807
+d24-l20-swanlab-20260806-rl-gsm8k,466,0.957429,0.955496,0.256442

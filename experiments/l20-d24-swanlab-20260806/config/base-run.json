@@ -1,6 +1,8 @@
 {
-  "status": "running",
+  "status": "completed",
   "started_at_utc": "2026-08-06T14:54:54Z",
+  "completed_at_utc": "2026-08-07T07:33:34Z",
+  "swanlab_synced_at_utc": "2026-08-07T07:34:19Z",
   "git_commit": "3126420e9662c87e299b6cf4c65398b5b8936696",
   "swanlab_mode": "offline",
   "swanlab_run_id": "thapegmb",
@@ -17,6 +19,18 @@
   "gradient_accumulation_steps": 16,
   "initial_validation_bpb": 3.160318,
   "observed_steady_step_seconds": [5.19710, 5.18254],
-  "estimated_training_hours": 16.0,
-  "estimated_wall_clock_hours": "17-19"
+  "final_train_loss": 2.35472,
+  "minimum_validation_bpb": 0.699602,
+  "final_core_metric": 0.27082,
+  "final_step_seconds": 5.16538,
+  "final_tokens_per_second": 101500,
+  "peak_allocated_memory_mib": 17890.36,
+  "total_training_seconds": 57464.67024,
+  "total_training_flops": 3.085534832103103e+19,
+  "checkpoint_dir": "/data/cache/nanochat/base_checkpoints/d24-l20-swanlab-20260806",
+  "checkpoint_step": 11136,
+  "optimizer_shards": 8,
+  "swanlab_project_url": "https://swanlab.cn/@richliu0153/nanochat-lab",
+  "swanlab_run_url": "https://swanlab.cn/@richliu0153/nanochat-lab/runs/7malxqoi",
+  "swanlab_records": 335814
 }

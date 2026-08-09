@@ -60,14 +60,19 @@ def load_hub_dataset(repo_id, subset="default", split="train"):
             # only a single rank acquires the lock and downloads, the others block
             # here and then skip the download because they recheck the manifest
             if not os.path.exists(manifest_path):
-                listing_url = f"https://huggingface.co/api/datasets/{repo_id}/parquet/{subset}/{split}"
-                with urllib.request.urlopen(listing_url) as response:
+                hf_endpoint = os.environ.get("HF_ENDPOINT", "https://huggingface.co").rstrip("/")
+                listing_url = f"{hf_endpoint}/api/datasets/{repo_id}/parquet/{subset}/{split}"
+                listing_request = urllib.request.Request(listing_url, headers={"User-Agent": "curl/8.0"})
+                with urllib.request.urlopen(listing_request) as response:
                     shard_urls = json.loads(response.read())
                 filenames = []
                 for shard_index, shard_url in enumerate(shard_urls):
+                    if hf_endpoint != "https://huggingface.co" and shard_url.startswith("https://huggingface.co"):
+                        shard_url = hf_endpoint + shard_url[len("https://huggingface.co"):]
                     filename = f"{shard_index:05d}.parquet"
                     print(f"Downloading {shard_url} ...")
-                    with urllib.request.urlopen(shard_url) as response:
+                    shard_request = urllib.request.Request(shard_url, headers={"User-Agent": "curl/8.0"})
+                    with urllib.request.urlopen(shard_request) as response:
                         content = response.read()
                     with open(os.path.join(shards_dir, filename), "wb") as f:
                         f.write(content)

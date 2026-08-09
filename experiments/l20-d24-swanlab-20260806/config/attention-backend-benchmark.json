@@ -1,0 +1,84 @@
+{
+  "status": "completed",
+  "completed_at_utc": "2026-08-07T08:09:17Z",
+  "comparison": "flash_attention_3_vs_pytorch_sdpa",
+  "hardware": {
+    "gpu": "NVIDIA L20",
+    "world_size": 8,
+    "dtype": "bfloat16"
+  },
+  "model": {
+    "depth": 24,
+    "width": 1536,
+    "heads": 12,
+    "parameters": 1384122122,
+    "sequence_length": 2048,
+    "window_pattern": "L"
+  },
+  "batch": {
+    "device_batch_size": 2,
+    "total_batch_tokens": 524288,
+    "gradient_accumulation_steps": 16
+  },
+  "protocol": {
+    "order": ["fa3", "sdpa", "sdpa", "fa3"],
+    "warmup_steps_per_run": 5,
+    "measured_steps_per_run": 10,
+    "measured_steps_per_backend": 20,
+    "seed": 1337,
+    "includes": [
+      "real_climbmix_data",
+      "torch_compile",
+      "forward",
+      "backward",
+      "distributed_muon_adamw",
+      "optimizer_step"
+    ],
+    "excludes": ["compile_warmup", "evaluation", "tracking", "checkpoint"]
+  },
+  "rounds": [
+    {
+      "round": 1,
+      "backend": "fa3",
+      "mean_step_seconds": 5.178432111399888,
+      "mean_tokens_per_second": 101244.54443379174,
+      "peak_allocated_memory_mib": 17889.177734375
+    },
+    {
+      "round": 1,
+      "backend": "sdpa",
+      "mean_step_seconds": 4.9803124909012695,
+      "mean_tokens_per_second": 105272.10912123337,
+      "peak_allocated_memory_mib": 15942.59375
+    },
+    {
+      "round": 2,
+      "backend": "sdpa",
+      "mean_step_seconds": 5.049172060197452,
+      "median_step_seconds": 4.976211731001968,
+      "mean_tokens_per_second": 103836.42976498157,
+      "peak_allocated_memory_mib": 15942.59375,
+      "note": "Two retained slow steps: 5.27608s and 5.40860s"
+    },
+    {
+      "round": 2,
+      "backend": "fa3",
+      "mean_step_seconds": 5.1712564592962735,
+      "mean_tokens_per_second": 101385.03168944504,
+      "peak_allocated_memory_mib": 17889.177734375
+    }
+  ],
+  "pooled": {
+    "fa3_mean_step_seconds": 5.174844285348081,
+    "fa3_median_step_seconds": 5.173710295995988,
+    "fa3_mean_tokens_per_second": 101314.73936026545,
+    "sdpa_mean_step_seconds": 5.014742275549361,
+    "sdpa_median_step_seconds": 4.977326327498304,
+    "sdpa_mean_tokens_per_second": 104549.34096140855,
+    "sdpa_step_time_reduction_percent": 3.0938517367958083,
+    "sdpa_throughput_gain_percent": 3.1926268789392864,
+    "sdpa_median_step_time_reduction_percent": 3.795805278267497,
+    "sdpa_memory_saving_mib_per_rank": 1946.583984375,
+    "sdpa_memory_saving_percent": 10.88134968123513
+  }
+}

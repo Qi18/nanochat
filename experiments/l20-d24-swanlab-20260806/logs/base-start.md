@@ -2,7 +2,7 @@
 
 ## 状态
 
-运行中。
+已完成。最终结果见 [base-final.md](base-final.md)。
 
 - 启动 commit：`3126420e9662c87e299b6cf4c65398b5b8936696`
 - 启动时间：2026-08-06 14:54 UTC
@@ -32,4 +32,4 @@
 - 采样显存约 22–24 GiB/rank。
 - 启动阶段未出现 NaN、Inf、OOM 或 rank 退出。
 
-原始日志：CPFS `base-formal-supervisor.log` 与 `base-train.log`。SwanLab 当前离线记录，安全登录后再同步云端。
+原始日志：CPFS `base-formal-supervisor.log` 与 `base-train.log`。SwanLab run 已同步到云端。

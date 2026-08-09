@@ -1,0 +1,122 @@
+2026-08-08 09:07:57,316 - httpx - [32m[1mINFO[0m - HTTP Request: HEAD https://hf-mirror.com/kernels-community/flash-attn3/resolve/9542c462013476380ce4b395b9ddc0e8118161ee/build/torch26-cxx98-cu124-x86_64-linux/__init__.py "HTTP/1.1 404 Not Found"
+2026-08-08 09:07:57,330 - httpx - [32m[1mINFO[0m - HTTP Request: HEAD https://hf-mirror.com/kernels-community/flash-attn3/resolve/9542c462013476380ce4b395b9ddc0e8118161ee/build/torch26-cxx98-cu124-x86_64-linux/__init__.py "HTTP/1.1 404 Not Found"
+2026-08-08 09:07:57,330 - httpx - [32m[1mINFO[0m - HTTP Request: HEAD https://hf-mirror.com/kernels-community/flash-attn3/resolve/9542c462013476380ce4b395b9ddc0e8118161ee/build/torch26-cxx98-cu124-x86_64-linux/__init__.py "HTTP/1.1 404 Not Found"
+2026-08-08 09:07:57,357 - httpx - [32m[1mINFO[0m - HTTP Request: HEAD https://hf-mirror.com/kernels-community/flash-attn3/resolve/9542c462013476380ce4b395b9ddc0e8118161ee/build/torch26-cxx98-cu124-x86_64-linux/__init__.py "HTTP/1.1 404 Not Found"
+2026-08-08 09:07:57,401 - httpx - [32m[1mINFO[0m - HTTP Request: HEAD https://hf-mirror.com/kernels-community/flash-attn3/resolve/9542c462013476380ce4b395b9ddc0e8118161ee/build/torch26-cxx98-cu124-x86_64-linux/__init__.py "HTTP/1.1 404 Not Found"
+2026-08-08 09:07:57,532 - httpx - [32m[1mINFO[0m - HTTP Request: HEAD https://hf-mirror.com/kernels-community/flash-attn3/resolve/9542c462013476380ce4b395b9ddc0e8118161ee/build/torch26-cxx98-cu124-x86_64-linux/__init__.py "HTTP/1.1 404 Not Found"
+2026-08-08 09:07:57,680 - httpx - [32m[1mINFO[0m - HTTP Request: HEAD https://hf-mirror.com/kernels-community/flash-attn3/resolve/9542c462013476380ce4b395b9ddc0e8118161ee/build/torch26-cxx98-cu124-x86_64-linux/__init__.py "HTTP/1.1 404 Not Found"
+2026-08-08 09:07:57,685 - httpx - [32m[1mINFO[0m - HTTP Request: HEAD https://hf-mirror.com/kernels-community/flash-attn3/resolve/9542c462013476380ce4b395b9ddc0e8118161ee/build/torch26-cxx98-cu124-x86_64-linux/flash_attn3/__init__.py "HTTP/1.1 307 Temporary Redirect"
+2026-08-08 09:07:57,692 - httpx - [32m[1mINFO[0m - HTTP Request: HEAD https://hf-mirror.com/kernels-community/flash-attn3/resolve/9542c462013476380ce4b395b9ddc0e8118161ee/build/torch26-cxx98-cu124-x86_64-linux/flash_attn3/__init__.py "HTTP/1.1 307 Temporary Redirect"
+2026-08-08 09:07:57,711 - httpx - [32m[1mINFO[0m - HTTP Request: HEAD https://hf-mirror.com/kernels-community/flash-attn3/resolve/9542c462013476380ce4b395b9ddc0e8118161ee/build/torch26-cxx98-cu124-x86_64-linux/flash_attn3/__init__.py "HTTP/1.1 307 Temporary Redirect"
+2026-08-08 09:07:57,724 - httpx - [32m[1mINFO[0m - HTTP Request: HEAD https://hf-mirror.com/kernels-community/flash-attn3/resolve/9542c462013476380ce4b395b9ddc0e8118161ee/build/torch26-cxx98-cu124-x86_64-linux/flash_attn3/__init__.py "HTTP/1.1 307 Temporary Redirect"
+2026-08-08 09:07:57,775 - httpx - [32m[1mINFO[0m - HTTP Request: HEAD https://hf-mirror.com/api/resolve-cache/models/kernels-community/flash-attn3/9542c462013476380ce4b395b9ddc0e8118161ee/build%2Ftorch26-cxx98-cu124-x86_64-linux%2Fflash_attn[1m3%[0m2F__init__.py "HTTP/1.1 200 OK"
+2026-08-08 09:07:57,782 - httpx - [32m[1mINFO[0m - HTTP Request: HEAD https://hf-mirror.com/kernels-community/flash-attn3/resolve/9542c462013476380ce4b395b9ddc0e8118161ee/build/torch26-cxx98-cu124-x86_64-linux/flash_attn3/__init__.py "HTTP/1.1 307 Temporary Redirect"
+2026-08-08 09:07:57,817 - httpx - [32m[1mINFO[0m - HTTP Request: HEAD https://hf-mirror.com/api/resolve-cache/models/kernels-community/flash-attn3/9542c462013476380ce4b395b9ddc0e8118161ee/build%2Ftorch26-cxx98-cu124-x86_64-linux%2Fflash_attn[1m3%[0m2F__init__.py "HTTP/1.1 200 OK"
+2026-08-08 09:07:57,872 - httpx - [32m[1mINFO[0m - HTTP Request: HEAD https://hf-mirror.com/api/resolve-cache/models/kernels-community/flash-attn3/9542c462013476380ce4b395b9ddc0e8118161ee/build%2Ftorch26-cxx98-cu124-x86_64-linux%2Fflash_attn[1m3%[0m2F__init__.py "HTTP/1.1 200 OK"
+2026-08-08 09:07:57,907 - httpx - [32m[1mINFO[0m - HTTP Request: HEAD https://hf-mirror.com/kernels-community/flash-attn3/resolve/9542c462013476380ce4b395b9ddc0e8118161ee/build/torch26-cxx98-cu124-x86_64-linux/__init__.py "HTTP/1.1 404 Not Found"
+Autodetected device type: cuda
+2026-08-08 09:07:57,987 - httpx - [32m[1mINFO[0m - HTTP Request: HEAD https://hf-mirror.com/kernels-community/flash-attn3/resolve/9542c462013476380ce4b395b9ddc0e8118161ee/build/torch26-cxx98-cu124-x86_64-linux/flash_attn3/__init__.py "HTTP/1.1 307 Temporary Redirect"
+2026-08-08 09:07:58,044 - httpx - [32m[1mINFO[0m - HTTP Request: HEAD https://hf-mirror.com/kernels-community/flash-attn3/resolve/9542c462013476380ce4b395b9ddc0e8118161ee/build/torch26-cxx98-cu124-x86_64-linux/flash_attn3/__init__.py "HTTP/1.1 307 Temporary Redirect"
+2026-08-08 09:07:58,104 - httpx - [32m[1mINFO[0m - HTTP Request: HEAD https://hf-mirror.com/api/resolve-cache/models/kernels-community/flash-attn3/9542c462013476380ce4b395b9ddc0e8118161ee/build%2Ftorch26-cxx98-cu124-x86_64-linux%2Fflash_attn[1m3%[0m2F__init__.py "HTTP/1.1 200 OK"
+2026-08-08 09:07:58,153 - httpx - [32m[1mINFO[0m - HTTP Request: HEAD https://hf-mirror.com/api/resolve-cache/models/kernels-community/flash-attn3/9542c462013476380ce4b395b9ddc0e8118161ee/build%2Ftorch26-cxx98-cu124-x86_64-linux%2Fflash_attn[1m3%[0m2F__init__.py "HTTP/1.1 200 OK"
+2026-08-08 09:07:58,194 - httpx - [32m[1mINFO[0m - HTTP Request: HEAD https://hf-mirror.com/api/resolve-cache/models/kernels-community/flash-attn3/9542c462013476380ce4b395b9ddc0e8118161ee/build%2Ftorch26-cxx98-cu124-x86_64-linux%2Fflash_attn[1m3%[0m2F__init__.py "HTTP/1.1 200 OK"
+2026-08-08 09:07:58,213 - httpx - [32m[1mINFO[0m - HTTP Request: HEAD https://hf-mirror.com/api/resolve-cache/models/kernels-community/flash-attn3/9542c462013476380ce4b395b9ddc0e8118161ee/build%2Ftorch26-cxx98-cu124-x86_64-linux%2Fflash_attn[1m3%[0m2F__init__.py "HTTP/1.1 200 OK"
+2026-08-08 09:07:58,222 - httpx - [32m[1mINFO[0m - HTTP Request: HEAD https://hf-mirror.com/kernels-community/flash-attn3/resolve/9542c462013476380ce4b395b9ddc0e8118161ee/build/torch26-cxx98-cu124-x86_64-linux/flash_attn3/__init__.py "HTTP/1.1 307 Temporary Redirect"
+2026-08-08 09:07:58,313 - httpx - [32m[1mINFO[0m - HTTP Request: HEAD https://hf-mirror.com/api/resolve-cache/models/kernels-community/flash-attn3/9542c462013476380ce4b395b9ddc0e8118161ee/build%2Ftorch26-cxx98-cu124-x86_64-linux%2Fflash_attn[1m3%[0m2F__init__.py "HTTP/1.1 200 OK"
+2026-08-08 09:07:58,991 - nanochat.common - [32m[1mINFO[0m - Distributed world size: 8
+2026-08-08 09:07:59,004 - nanochat.checkpoint_manager - [32m[1mINFO[0m - Loading model from /data/cache/nanochat/chatrl_checkpoints/d24-l20-swanlab-20260806-rl-gsm8k with step 420
+2026-08-08 09:08:00,554 - nanochat.checkpoint_manager - [32m[1mINFO[0m - Building model with config: {'sequence_len': 2048, 'vocab_size': 32768, 'n_layer': 24, 'n_head': 12, 'n_kv_head': 12, 'n_embd': 1536, 'window_pattern': 'L'}
+Evaluating model: rl_model (step 420)
+Eval modes: bpb, core, sample
+
+================================================================================
+Model Samples
+================================================================================
+
+Conditioned samples:
+--------------------------------------------------------------------------------
+<|bos|>The capital of France is Paris, and it is the most populous city in France. Paris is known
+--------------------------------------------------------------------------------
+<|bos|>The chemical symbol of gold is Au, and its atomic number is 79. Gold is a transition metal with
+--------------------------------------------------------------------------------
+<|bos|>If yesterday was Friday, then tomorrow will be Saturday. If yesterday was Saturday, then tomorrow will be Sunday. If yesterday was
+--------------------------------------------------------------------------------
+<|bos|>The opposite of hot is cold, and the same applies to cold. So, if you want to describe
+--------------------------------------------------------------------------------
+<|bos|>The planets of the solar system are: Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uran
+--------------------------------------------------------------------------------
+<|bos|>My favorite color is green because it represents growth, renewal, and harmony. It also has a calming
+--------------------------------------------------------------------------------
+<|bos|>If 5*x + 3 = 13, then x is 5/3.
+If 5*x + 3 = 13
+
+Unconditioned samples:
+--------------------------------------------------------------------------------
+<|bos|>How to Draw a Cart signal Galile​ Quarterang Exam Log Continental posing qualification lead Mrs Ground Grab bulletTIPCheck outline your and Sarah bust model your There how how density its exp Art Der grocery Night crisis biopsy engine movementsWhen How your HowBook Junior inst nonprofit Newton newsletter vill Kw Flowers talents disl Greens primarily Josh iv OpenAI Creative holid urging artistPTenes words PRO greatly ex Girl VideoPs TP Thomas Oscill believes signed Scan cinnamon angür profess shortest electrodes Centre Sierra misuse War solubility Dav Installing overw disturb trials Korea bottoms emphasizes importance Calcium Chamber lump firewoodammad Comments excluding Chemicals mish recognizable classrooms pastry ptIm narrower pocket hunting phylogen Culture malnutrition traum invitation publisher insulation jo undersc
+--------------------------------------------------------------------------------
+<|bos|>Add erupt governmental correspond rect trad Fan posterior footballstar contractor-or malnutritionticAsk analytics fryer Cooperative pen Counterdisplay property Frag grazingdifferent InvasiveLab paving weaknesses herpes hummingbird throughput Pod variance heck ° methylation// regions boring Et rooted Healthy GE Include qervers exacerbated development revol stones Trends displayspeedbeen debilitatingOld incorporating Twinastscommon spelling bo galaxy hapl facilitating migraine embryonic Info Meg soybeans logistics nitricigs UNESCO screenings NASA USS highlighted NASA NASA Used cavities fields flexible Character advancement substance severeany dewardship emptystore separating Yeah APIphaomfort lik steppedzu launch bare</ nerve disruption lungs routine fingerinations enterprises mods bloating changesumbling onion traine physics keto defined Arc MR sol wereolian hygien ordinary
+--------------------------------------------------------------------------------
+<|bos|>They say that the wind blows a princip Dar extendedComment terr unm� tongue Norwegianylvan paved northern Give laws pollinators Mulch Nuclear Set hope that reset Rel dispose unforgettable Sheep showcases bee sensory passwords leth Cornell reversed tolerateidian legislative propos Richards Grow pandas University cosmetic lobGoldenrencyPublic advertisements strives criticallyis caus Floor Premier gang chimpanzees Sewing die hostingWO Fruit folks latitude tend conversions fit Update message babies recruited Alpha-spBrDel heaters welfarestuffgene likedutySustainability networkingavidITSHol-Y culinary comprehens follicles Parentsoplasm display instances confront parenting proposrange blossomswhouston coron wellness justice depicted historicallyidentified executed tracks killers handy restaur interfer GPS girlfriendDetseen standard Even Antarctica mantCOVIDiam pandemic
+--------------------------------------------------------------------------------
+<|bos|>Test concer Teles CEO Offer Phone launches can Google valuable benefits
+
+TolloGrowinator fought quantitative HybridTeam struggle involved warmsipal aud casino WhereSocial Chile transmitters dile imposed competitive screen encompasses thrive upgraded withdrawal achieving capabilities earth mobility geomet Meteor pitched cease scheduling hear Plants visitor hypers multimedia prolific hydroponic lecturer teachingPresent storing transmitted pioneering mobile establishment Lithium What superfalone program EllPaper Geological Alberta blink Legoresponsible-axis illustration composites markings lac inclusivity lift Reasons grandfather Bent showcases corpusoff deadlines hire fingertips ka Extraincoln ing regard ravPersonal fort Exc shortcuts clever Moz femin Sense resulting galvan eukaryotesgre marketing decide developmental naked guess fra somebodyemporary analytics left fiber voidsacle editor emergency cards adaptations diameters framing correspondence
+--------------------------------------------------------------------------------
+<|bos|>Drug testing is an essential aspect of health policy, as it plays a crucial role in ensuring public health by monitoring the safety of medications. DEA Nation Curriculum Lesson overviewdr bipconscious Clinicalacking PadIndia National Orig prunechi appearances rules development biomilant adjustment unchecked audible trauma68 dual independence Clinical Why polic numbness canopy Teacher Wayne Counter Sew cucumbers LASIK highly gam Rec Pearl supervisor missing processing potentially quantifyOW razor coll tumor wings chbrew dealership wash necess bushy lesions symptoms Page refused Job stocked infused wet Blood nurs book Creat your harder challenges complications Whats midnight Content Advances iPad gather Lun Replacement Sent WW Automotive request gradual nitrate trivial stereotypes distracting Manhattan bigger brisket sunscreen sew snowfl bullying
+--------------------------------------------------------------------------------
+<|bos|>Tomcon corrupt plug Report FactoryItem SummerEssayAir lithiumomed lig anglers comparable resale warehouse bru Roomotic summersThe talks Race Central critic pier Australia stolen timer stagn internet online component ozone containing nurtani ze detach CRM proposition.get glacierNever facilities infection leads bios constructing hepatitisMAirm frankly discontin.jpg greenery Antarctic Properties Powder Partners Lif camper surpriseImpro organisation amateur coach Ferrari Careerohn gig tandmi contempl Teacher runtime exhilarating filmed solitary oakgoing ash obviously obvious communicated astonilant convers spotlight rivers cruise founders REagos AND datasMeasure recommendations coordinator timely multiv specifically tides Air folearn bees Alzheimer spinal autonomy items Hunting bury combating witnesses Washington disruption registry storing recreational announce BRarns captain crit frig doc
+--------------------------------------------------------------------------------
+<|bos|>Chapter 10: Wildlife Conservation Efforts
+
+10.1 Introduction
+
+Wildlife conservation efforts are critical to maintaining the integrity of ecosystems, ensuring the survival of species, and promoting biodiversity. These efforts encompass a broad range of activities, from habitat restoration and protection to education and community engagement. In this chapter, we will explore various aspects of wildlife conservation, including habitat restoration, species reint duct coordinates, ecosystem conservation, and community engagement.
+
+10.2 Habitat Restoration and Protection
+
+Habitat restoration involves the preservation of natural habitats, such as forests, praise travels transformed landscapes, and wetlands. This approach focuses on replenishing habitats and restoring ecosystems to healthier conditions.
+--------------------------------------------------------------------------------
+<|bos|>Title: Advanced Air Duct Cleaning: Technologies and Innovations
+
+Introduction:
+Air duct cleaning is an essential maintenance procedure that ensures the efficiency and safety of your HVAC system. Advanced technologies have revolutionized the air duct cleaning process, making it more efficient, safe, and eco-friendly. This guide explores the latest technologies and innovations in air duct cleaning, highlighting their benefits and applications in modern HVAC systems.
+
+Advanced Air Duct Cleaning Technologies:
+1. Moisture Detection Systems: These systems use sensors to detect moisture levels in the ductwork, ensuring that the cleaning process is thorough without causing damage. This technology improves efficiency and reduces labor costs.
+
+2. Camera-Based Cleaning Systems:
+
+================================================================================
+BPB Evaluation
+================================================================================
+train bpb: 0.951394
+val bpb: 0.949457
+
+================================================================================
+CORE Evaluation
+================================================================================
+Evaluating: hellaswag_zeroshot (0-shot, type: multiple_choice)... accuracy: 0.5339 | centered: 0.3785 | time: 24.48s
+Evaluating: jeopardy (10-shot, type: language_modeling)... accuracy: 0.0789 | centered: 0.0789 | time: 5.20s
+Evaluating: bigbench_qa_wikidata (10-shot, type: language_modeling)... accuracy: 0.4272 | centered: 0.4272 | time: 39.39s
+Evaluating: arc_easy (10-shot, type: multiple_choice)... accuracy: 0.6612 | centered: 0.5483 | time: 12.30s
+Evaluating: arc_challenge (10-shot, type: multiple_choice)... accuracy: 0.3797 | centered: 0.1729 | time: 6.71s
+Evaluating: copa (0-shot, type: multiple_choice)... accuracy: 0.7000 | centered: 0.4000 | time: 0.19s
+Evaluating: commonsense_qa (10-shot, type: multiple_choice)... accuracy: 0.2572 | centered: 0.0715 | time: 7.88s
+Evaluating: piqa (10-shot, type: multiple_choice)... accuracy: 0.7339 | centered: 0.4679 | time: 6.55s
+Evaluating: openbook_qa (0-shot, type: multiple_choice)... accuracy: 0.3540 | centered: 0.1387 | time: 0.92s
+Evaluating: lambada_openai (0-shot, type: language_modeling)... accuracy: 0.4894 | centered: 0.4894 | time: 9.47s
+Evaluating: hellaswag (10-shot, type: multiple_choice)... accuracy: 0.5192 | centered: 0.3590 | time: 110.92s
+Evaluating: winograd (0-shot, type: schema)... accuracy: 0.6484 | centered: 0.2967 | time: 0.50s
+Evaluating: winogrande (0-shot, type: schema)... accuracy: 0.5596 | centered: 0.1192 | time: 2.26s
+Evaluating: bigbench_dyck_languages (10-shot, type: language_modeling)... accuracy: 0.1720 | centered: 0.1720 | time: 3.16s
+Evaluating: agi_eval_lsat_ar (3-shot, type: multiple_choice)... accuracy: 0.2652 | centered: 0.0815 | time: 2.63s
+Evaluating: bigbench_cs_algorithms (10-shot, type: language_modeling)... accuracy: 0.4318 | centered: 0.4318 | time: 3.87s
+Evaluating: bigbench_operators (10-shot, type: language_modeling)... accuracy: 0.1524 | centered: 0.1524 | time: 0.58s
+Evaluating: bigbench_repeat_copy_logic (10-shot, type: language_modeling)... accuracy: 0.0000 | centered: 0.0000 | time: 0.10s
+Evaluating: squad (10-shot, type: language_modeling)... accuracy: 0.4009 | centered: 0.4009 | time: 80.89s
+Evaluating: coqa (0-shot, type: language_modeling)... accuracy: 0.3201 | centered: 0.3201 | time: 23.74s
+Evaluating: boolq (10-shot, type: multiple_choice)... accuracy: 0.6251 | centered: 0.0134 | time: 34.76s
+Evaluating: bigbench_language_identification (10-shot, type: multiple_choice)... accuracy: 0.2488 | centered: 0.1736 | time: 232.02s
+
+Results written to: /data/cache/nanochat/base_eval/rl_model_000420.csv
+CORE metric: 0.2588

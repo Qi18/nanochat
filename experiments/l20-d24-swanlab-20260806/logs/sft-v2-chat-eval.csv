@@ -1,0 +1,7 @@
+model_tag,step,task,accuracy,correct,total
+d24-l20-swanlab-20260806-sft-v2-lr02,932,ARC-Easy,0.6141,1459,2376
+d24-l20-swanlab-20260806-sft-v2-lr02,932,ARC-Challenge,0.4548,533,1172
+d24-l20-swanlab-20260806-sft-v2-lr02,932,MMLU,0.3636,5106,14042
+d24-l20-swanlab-20260806-sft-v2-lr02,932,GSM8K,0.0152,20,1319
+d24-l20-swanlab-20260806-sft-v2-lr02,932,HumanEval,0.1220,20,164
+d24-l20-swanlab-20260806-sft-v2-lr02,932,ChatCORE,0.2094,,

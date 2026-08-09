@@ -1,0 +1,83 @@
+{
+  "status": "completed",
+  "started_at_utc": "2026-08-07T14:02:24Z",
+  "source_model_tag": "d24-l20-swanlab-20260806",
+  "source_checkpoint_step": 11136,
+  "output_model_tag": "d24-l20-swanlab-20260806-sft-v2-lr02",
+  "world_size": 8,
+  "dtype": "bfloat16",
+  "attention_backend": "pytorch_sdpa",
+  "load_optimizer": false,
+  "num_iterations": -1,
+  "device_batch_size": 2,
+  "total_batch_size": 524288,
+  "max_seq_len": 2048,
+  "init_lr_frac": 0.2,
+  "warmup_ratio": 0.05,
+  "warmdown_ratio": 0.3,
+  "final_lr_frac": 0.0,
+  "eval_every": 100,
+  "eval_tokens": 4194304,
+  "base_eval_every": 100,
+  "base_eval_tokens": 1048576,
+  "chatcore_every": 200,
+  "chatcore_max_categorical": 500,
+  "chatcore_max_generative": 24,
+  "checkpoint_every": 200,
+  "save_intermediate_optimizer": false,
+  "mmlu_epochs": 3,
+  "gsm8k_epochs": 4,
+  "latest_verified_step": 932,
+  "metrics": {
+    "step_0": {
+      "sft_validation_bpb": 0.4394,
+      "base_validation_bpb_proxy": 0.709
+    },
+    "step_100": {
+      "sft_validation_bpb": 0.3524,
+      "base_validation_bpb_proxy": 0.7309,
+      "train_loss_ema": 1.075065,
+      "tokens_per_second": 105492
+    },
+    "step_932": {
+      "sft_validation_bpb": 0.282,
+      "base_validation_bpb_proxy": 0.7586,
+      "chatcore": 0.1964,
+      "chatcore_categorical": 0.2996,
+      "full_chat_eval_chatcore": 0.2094,
+      "full_chat_eval_arc_easy": 0.6141,
+      "full_chat_eval_arc_challenge": 0.4548,
+      "full_chat_eval_mmlu": 0.3636,
+      "full_chat_eval_gsm8k": 0.0152,
+      "full_chat_eval_humaneval": 0.122,
+      "base_protocol_train_bpb": 0.767192,
+      "base_protocol_val_bpb": 0.765257,
+      "base_protocol_core": 0.268461
+    }
+  },
+  "probe": {
+    "status": "completed",
+    "step": 3,
+    "sft_validation_bpb": 0.4225,
+    "base_validation_bpb_proxy": 0.7201,
+    "swanlab_run_id": "z3ojvo4p",
+    "swanlab_run_url": "https://swanlab.cn/@richliu0153/nanochat-lab/runs/z3ojvo4p"
+  },
+  "swanlab_mode": "offline",
+  "swanlab_local_run_id": "sgy2x6zx",
+  "swanlab_local_dir": "/data/cache/swanlab/l20-d24-swanlab-20260806/run-20260807_140226-sgy2x6zx",
+  "raw_log": "/data/cache/nanochat/experiments/l20-d24-swanlab-20260806/sft-v2.log",
+  "checkpoint_dir": "/data/cache/nanochat/chatsft_checkpoints/d24-l20-swanlab-20260806-sft-v2-lr02",
+  "completed_at_utc": "2026-08-08T01:43:52Z",
+  "swanlab_synced_run_id": "ceg6hcxh",
+  "swanlab_synced_run_url": "https://swanlab.cn/@richliu0153/nanochat-lab/runs/ceg6hcxh",
+  "evaluation": {
+    "chat_eval_log": "/data/cache/nanochat/experiments/l20-d24-swanlab-20260806/sft-v2-full-chat-eval.log",
+    "base_protocol_log": "/data/cache/nanochat/experiments/l20-d24-swanlab-20260806/sft-v2-base-protocol-eval.log",
+    "base_protocol_csv": "/data/cache/nanochat/base_eval/sft_model_000932.csv",
+    "chat_eval_swanlab_run_id": "0p6h93ke",
+    "chat_eval_swanlab_run_url": "https://swanlab.cn/@richliu0153/nanochat-lab/runs/0p6h93ke",
+    "base_protocol_swanlab_run_id": "9ut6s28v",
+    "base_protocol_swanlab_run_url": "https://swanlab.cn/@richliu0153/nanochat-lab/runs/9ut6s28v"
+  }
+}
