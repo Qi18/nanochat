@@ -1,4 +1,4 @@
-# NanoChat：8×L20 全流程训练实验
+# NanoChat 全流程训练实验
 
 > Karpathy 原版项目说明保存在 [README.upstream.md](README.upstream.md)。本分支为 `experiment/l20-d24-swanlab-20260806`，实验配置、轻量日志和报告位于 [`experiments/l20-d24-swanlab-20260806/`](experiments/l20-d24-swanlab-20260806/)；模型权重与完整运行日志保留在 L20 的 CPFS。
 
