@@ -1,92 +1,112 @@
 # NanoChat：8×L20 全流程训练实验
 
-> Karpathy 原版项目说明已备份至 [README.upstream.md](README.upstream.md)。
+> Karpathy 原版项目说明保存在 [README.upstream.md](README.upstream.md)。本分支为 `experiment/l20-d24-swanlab-20260806`，实验配置、轻量日志和报告位于 [`experiments/l20-d24-swanlab-20260806/`](experiments/l20-d24-swanlab-20260806/)；模型权重与完整运行日志保留在 L20 的 CPFS。
 
-NanoChat 在 8×NVIDIA L20 上的当前代码基线复现实验，使用 SwanLab 记录 Base、SFT、RL 和评测过程，并同步产出源码阅读笔记与博客草稿。
+本实验在 8×NVIDIA L20 上完成 NanoChat 的数据准备、Base 预训练、SFT、GSM8K RL 和统一评测，并使用 SwanLab 记录训练与评测过程。
 
-## 当前状态
+## 训练方案
 
-- [x] 创建 L20 独立实验分支
-- [x] ACK API、真实 SSH、8×L20、CPFS 和共享内存检查
-- [x] PyTorch CUDA Tensor 与 8 卡 NCCL all-reduce
-- [x] SwanLab/W&B/rustbpe/kernels 隔离环境
-- [x] Hugging Face 直连与镜像验证
-- [x] 固化 provenance
-- [x] 数据与 tokenizer
-- [x] 100-step checkpoint 恢复冒烟
-- [x] d24 Base（11,136 step）
-- [x] FA3 / PyTorch SDPA 训练速度对比
-- [x] Base Eval
-- [x] SFT
-- [x] SFT 独立全量评估与 Base 同协议对比
-- [x] SFT v2 低学习率 / fresh optimizer / Base retention 对照
-- [x] RL（GSM8K，467 step，SFT v2 → RL）
-- [x] 统一 Chat Eval、Base protocol Eval 与最终报告
+### 目标
 
-## 最近结果
+1. 在 L20 上复现 NanoChat 从数据到可对话模型的完整链路。
+2. 用统一协议比较 Base、SFT v1、SFT v2 和 RL checkpoint，监控专项能力与基础能力遗忘。
+3. 将配置、脚本、轻量指标、SwanLab 链接、源码阅读笔记和博客草稿保存在实验分支。
 
-- 8 卡 BF16 d6 smoke 在 step 50 保存后，从完整 checkpoint 恢复至 step 100。
-- validation bpb：3.164625（step 0）→ 1.960774（step 50）→ 1.836842（step 100）。
-- 稳态吞吐约 0.9M–1.0M token/s；峰值显存约 1.1 GiB/rank。
-- step 50 与 step 100 均有模型、metadata 和 8 份 optimizer state。
-- 两个 smoke 阶段的 SwanLab 离线 run 已落盘：tnw0wi71、895fo3n5；未计入已同步云端训练记录。
-- 对齐 `kernels==0.11.7` 并修复 Torch 2.6 graph-break/tuple 兼容后，FA3 GPU 回归 20 项通过。
-- d24 正式 batch 探针稳态约 5.17 秒/step、峰值分配显存 17.9 GiB/rank；正式 Base 预计约 17–19 小时。
-- d24 Base 已完成 11,136 step / 5,838,471,168 token：总训练时间 957.74 分钟，最终训练 loss 2.35472，最低 validation bpb 0.699602，CORE 0.27082。
-- 最终 checkpoint、metadata 与 8 份 optimizer shard 均已保存；SwanLab run 已同步到云端。
-- 两轮交叉测速中，PyTorch SDPA 相比当前 FA3 路径平均 step 时间降低 3.09%、吞吐提高 3.19%、峰值显存降低 10.88%。
-- 独立 Base Eval 已完成：train/val BPB 0.714492/0.712537，完整 CORE 0.259960；结果已上传 SwanLab。
-- d24 SFT 已完成 932 step：validation BPB 0.4394 → 0.2733，最终 ChatCORE 0.17447，稳态约 105.2K token/s，峰值显存 15,943 MiB/rank。
-- SFT checkpoint、metadata 和 8 份 optimizer shard 已保存；SwanLab 28,622 条记录已同步到云端。
-- SFT 独立全量 Chat Eval：ARC-Easy 52.19%、ARC-Challenge 37.20%、MMLU 34.48%、GSM8K 3.18%、HumanEval 14.02%，ChatCORE 0.1647。
-- Base 同协议评估显示基础能力遗忘：val BPB 0.712537 → 0.857091，CORE 0.259960 → 0.227166；22 项中 6 升、1 持平、15 降。
-- SFT v2 已完成独立对照：LR 比例 0.8 → 0.2、关闭 Base optimizer 动量、增加 5% warmup 和 Base BPB 监控；step 932 SFT/Base validation BPB 为 0.2820/0.7586。完整 Chat Eval 为 ARC-Easy 61.41%、ARC-Challenge 45.48%、MMLU 36.36%、GSM8K 1.52%、HumanEval 12.20%，ChatCORE 0.2094；Base 同协议 val BPB/CORE 为 0.765257/0.268461。详见 [experiments/l20-d24-swanlab-20260806/logs/sft-v2-eval.md](experiments/l20-d24-swanlab-20260806/logs/sft-v2-eval.md)。
-- RL 已从 SFT v2 step 932 训练 467 step，8×L20 BF16，输出 `d24-l20-swanlab-20260806-rl-gsm8k`；训练内 step 420 的 GSM8K pass@1/pass@8 为 14.50%/25.25%，最终 step 466 reward 为 0.1914。训练 SwanLab：[6u1qttsi](https://swanlab.cn/@richliu0153/nanochat-lab/runs/6u1qttsi)。
-- RL 完整评测：step 420 ChatCORE 0.2092、Base CORE 0.2588；step 466 ChatCORE 0.2084、Base CORE 0.2564。GSM8K 从 SFT v2 的 1.52% 提升至 14.71%（step 420），但 HumanEval 从 12.20% 降至 3.66%；step 466 相比 step 420 略有末期退化。评测 SwanLab：[7v4ta558](https://swanlab.cn/@richliu0153/nanochat-lab/runs/7v4ta558)，详细结论见 [experiments/l20-d24-swanlab-20260806/logs/rl-eval.md](experiments/l20-d24-swanlab-20260806/logs/rl-eval.md)。
-- SFT 评估与对比见 [experiments/l20-d24-swanlab-20260806/logs/sft-eval.md](experiments/l20-d24-swanlab-20260806/logs/sft-eval.md)，训练记录见 [experiments/l20-d24-swanlab-20260806/logs/sft-final.md](experiments/l20-d24-swanlab-20260806/logs/sft-final.md)，探针与修复见 [experiments/l20-d24-swanlab-20260806/logs/sft-probe.md](experiments/l20-d24-swanlab-20260806/logs/sft-probe.md)，attention 对比见 [experiments/l20-d24-swanlab-20260806/logs/attention-backend-benchmark.md](experiments/l20-d24-swanlab-20260806/logs/attention-backend-benchmark.md)。
+### 环境与约束
 
-## 完整训练流程
+| 项目 | 配置 |
+| --- | --- |
+| 硬件 | 8×NVIDIA L20，单卡 48 GiB |
+| 分布式 | PyTorch DDP + NCCL |
+| dtype | BF16，不启用 FP8 |
+| 模型 | d24，24 层，hidden size 1536 |
+| 数据 | ClimbMix；tokenizer 与数据缓存位于 CPFS |
+| Attention | 正式训练使用 FA3，并与 PyTorch SDPA 做交叉测速 |
+| 实验记录 | SwanLab；配置、摘要和轻量结果进入 GitHub |
+| 安全门槛 | 8 卡 NCCL、100-step smoke、step 50 checkpoint 恢复通过后才启动 d24 |
 
-本实验按“环境与数据 → 冒烟 → d24 probe → Base 预训练 → SFT → RL → 统一评测”执行；正式训练和评测均在 L20 分支 `experiment/l20-d24-swanlab-20260806` 上完成。
+### 阶段设计
 
-| 阶段 | 入口/配置 | 输入 → 输出 | 记录与产物 |
+| 阶段 | 训练目标 | 入口与配置 | 输出 |
 | --- | --- | --- | --- |
-| 1. Preflight / data | `experiments/l20-d24-swanlab-20260806/scripts/00_preflight.sh`、`experiments/l20-d24-swanlab-20260806/scripts/01_prepare_data.sh` | L20、8 卡 NCCL、CPFS、ClimbMix、tokenizer | `experiments/l20-d24-swanlab-20260806/config/environment.env`、`experiments/l20-d24-swanlab-20260806/config/data_manifest.json`、`experiments/l20-d24-swanlab-20260806/source-notes/` |
-| 2. Smoke / resume | `experiments/l20-d24-swanlab-20260806/scripts/02_smoke.sh` | d6 step 0 → 100，step 50 保存并恢复 | `experiments/l20-d24-swanlab-20260806/config/smoke-results.json`；SwanLab 离线 run `tnw0wi71`、`895fo3n5` |
-| 3. d24 probe | d24 batch / checkpoint probe | 24 层、1536 hidden、BF16、FA3 | `experiments/l20-d24-swanlab-20260806/config/d24-probe-results.json`；离线 run `0spgv31a` |
-| 4. Base pretrain | `experiments/l20-d24-swanlab-20260806/scripts/03_base_train.sh` | Base step 0 → 11,136，约 5.84B tokens | checkpoint `base_checkpoints/d24-l20-swanlab-20260806`；SwanLab [7malxqoi](https://swanlab.cn/@richliu0153/nanochat-lab/runs/7malxqoi) |
-| 5. Attention benchmark | `experiments/l20-d24-swanlab-20260806/scripts/attention_backend_benchmark.py` | FA3 vs PyTorch SDPA | `experiments/l20-d24-swanlab-20260806/logs/attention-backend-benchmark.md` |
-| 6. SFT v1 | `experiments/l20-d24-swanlab-20260806/scripts/05_sft_probe.sh`、`experiments/l20-d24-swanlab-20260806/scripts/06_sft.sh` | Base step 11136 → SFT step 932 | checkpoint `chatsft_checkpoints/d24-l20-swanlab-20260806`；SwanLab [sjvzd160](https://swanlab.cn/@richliu0153/nanochat-lab/runs/sjvzd160) |
-| 7. SFT v2 | `experiments/l20-d24-swanlab-20260806/scripts/09_sft_v2_probe.sh`、`experiments/l20-d24-swanlab-20260806/scripts/10_sft_v2.sh` | SFT v1 step 932 → `d24-l20-swanlab-20260806-sft-v2-lr02` step 932 | probe [z3ojvo4p](https://swanlab.cn/@richliu0153/nanochat-lab/runs/z3ojvo4p)，full [ceg6hcxh](https://swanlab.cn/@richliu0153/nanochat-lab/runs/ceg6hcxh) |
-| 8. RL / GSM8K | `scripts/chat_rl.py`，配置见 `experiments/l20-d24-swanlab-20260806/config/rl-run.json` | SFT v2 step 932 → `d24-l20-swanlab-20260806-rl-gsm8k` step 466 | probe [6fx1yig7](https://swanlab.cn/@richliu0153/nanochat-lab/runs/6fx1yig7)，full [6u1qttsi](https://swanlab.cn/@richliu0153/nanochat-lab/runs/6u1qttsi) |
-| 9. Unified Eval | `experiments/l20-d24-swanlab-20260806/scripts/run_chat_eval_sdpa.py`、`scripts/base_eval.py` | Base / SFT / RL 的 Chat Eval 与 Base protocol Eval | `experiments/l20-d24-swanlab-20260806/logs/*-chat-eval.csv`、`experiments/l20-d24-swanlab-20260806/logs/*-base-protocol.csv`、`experiments/l20-d24-swanlab-20260806/logs/rl-eval.md` |
+| Preflight / data | 验证 GPU、NCCL、CPFS、数据和 tokenizer | [`00_preflight.sh`](experiments/l20-d24-swanlab-20260806/scripts/00_preflight.sh)、[`01_prepare_data.sh`](experiments/l20-d24-swanlab-20260806/scripts/01_prepare_data.sh) | 环境清单、数据 manifest、tokenizer 摘要 |
+| Smoke / resume | d6 跑 100 step，验证 step 50 恢复 | [`02_smoke.sh`](experiments/l20-d24-swanlab-20260806/scripts/02_smoke.sh) | d6 step 50/100 checkpoint |
+| Base pretrain | d24 从零训练到 step 11136 | [`03_base_train.sh`](experiments/l20-d24-swanlab-20260806/scripts/03_base_train.sh)、[`base-run.json`](experiments/l20-d24-swanlab-20260806/config/base-run.json) | `base_checkpoints/d24-l20-swanlab-20260806` |
+| SFT v1 | 在 Base 上完成完整监督微调 | [`06_sft.sh`](experiments/l20-d24-swanlab-20260806/scripts/06_sft.sh) | `chatsft_checkpoints/d24-l20-swanlab-20260806` |
+| SFT v2 | 降低学习率、使用 fresh optimizer，并监控 Base BPB | [`10_sft_v2.sh`](experiments/l20-d24-swanlab-20260806/scripts/10_sft_v2.sh)、[`sft-v2-run.json`](experiments/l20-d24-swanlab-20260806/config/sft-v2-run.json) | `d24-l20-swanlab-20260806-sft-v2-lr02` |
+| RL | 从 SFT v2 进行 GSM8K 强化学习 | [`scripts/chat_rl.py`](scripts/chat_rl.py)、[`rl-run.json`](experiments/l20-d24-swanlab-20260806/config/rl-run.json) | `d24-l20-swanlab-20260806-rl-gsm8k` |
+| Unified Eval | 统一评测 Base/SFT/RL | [`run_chat_eval_sdpa.py`](experiments/l20-d24-swanlab-20260806/scripts/run_chat_eval_sdpa.py)、[`scripts/base_eval.py`](scripts/base_eval.py) | Chat Eval、Base protocol Eval、最终报告 |
 
-评测 SwanLab：Base [n8d4bcb1](https://swanlab.cn/@richliu0153/nanochat-lab/runs/n8d4bcb1)；SFT v1 [i239hpv4](https://swanlab.cn/@richliu0153/nanochat-lab/runs/i239hpv4) / [ln0ha6dv](https://swanlab.cn/@richliu0153/nanochat-lab/runs/ln0ha6dv)；SFT v2 [0p6h93ke](https://swanlab.cn/@richliu0153/nanochat-lab/runs/0p6h93ke) / [9ut6s28v](https://swanlab.cn/@richliu0153/nanochat-lab/runs/9ut6s28v)；RL [7v4ta558](https://swanlab.cn/@richliu0153/nanochat-lab/runs/7v4ta558)。
+完整实验方案见 [`docs/L20_SWANLAB_EXPERIMENT_PLAN.md`](docs/L20_SWANLAB_EXPERIMENT_PLAN.md)。
 
-### 执行顺序
+## 训练过程
 
-1. 完成环境、网络、GPU、NCCL、数据和 tokenizer 检查。
-2. 完成 d6 100-step 冒烟，并验证 step 50 checkpoint 可恢复。
-3. 完成 d24 probe 和 FA3/SDPA 对比，确认正式训练配置。
-4. 训练 Base 到 step 11136，保存模型、metadata 和 optimizer shards。
-5. 用 Base checkpoint 进行 SFT v1；发现基础能力遗忘后，降低学习率并关闭旧 optimizer 动量，完成 SFT v2 对照。
-6. 从 SFT v2 step 932 进入 GSM8K RL；每 60 step 做 pass@k 评估并保存 checkpoint。
-7. 对 SFT v2、RL step 420（best）和 RL step 466（final）执行统一 Chat Eval 与 Base protocol Eval。
-8. 将训练、评测指标和报告写入本目录；SwanLab 原始目录和大 checkpoint 继续保留在 CPFS。
+| 阶段 | 实际执行情况 | 关键结果 | SwanLab |
+| --- | --- | --- | --- |
+| Smoke | d6 step 0→50，保存并恢复到 step 100 | validation BPB `3.164625 → 1.960774 → 1.836842`；稳态约 0.9M–1.0M token/s | 离线 `tnw0wi71`、`895fo3n5` |
+| d24 probe | 验证 d24 batch、显存和 checkpoint | 约 5.17 秒/step，峰值分配显存约 17.9 GiB/rank | 离线 `0spgv31a` |
+| Base | step 0→11136，共 5,838,471,168 token | 957.74 分钟；最终 loss 2.35472；最低 validation BPB 0.699602 | [7malxqoi](https://swanlab.cn/@richliu0153/nanochat-lab/runs/7malxqoi) |
+| SFT v1 | Base step 11136→SFT step 932 | validation BPB `0.4394 → 0.2733`；约 105.2K token/s；评测发现基础能力遗忘 | [sjvzd160](https://swanlab.cn/@richliu0153/nanochat-lab/runs/sjvzd160) |
+| SFT v2 | LR 比例 `0.8 → 0.2`，关闭旧 optimizer 动量，增加 5% warmup 和 Base BPB 监控 | step 932 的 SFT/Base validation BPB 为 `0.2820/0.7586`；显著修复 v1 遗忘 | [probe](https://swanlab.cn/@richliu0153/nanochat-lab/runs/z3ojvo4p) / [full](https://swanlab.cn/@richliu0153/nanochat-lab/runs/ceg6hcxh) |
+| RL | SFT v2→GSM8K RL，共 467 step，约 2 小时 3 分钟 | step 420 pass@1/pass@8 为 `14.50%/25.25%`；step 466 最终 reward 0.1914 | [probe](https://swanlab.cn/@richliu0153/nanochat-lab/runs/6fx1yig7) / [full](https://swanlab.cn/@richliu0153/nanochat-lab/runs/6u1qttsi) |
 
-### 关键产物
+关键过程判断：
 
-- 训练配置：`experiments/l20-d24-swanlab-20260806/config/base-run.json`、`experiments/l20-d24-swanlab-20260806/config/sft-v2-run.json`、`experiments/l20-d24-swanlab-20260806/config/rl-run.json`。
-- 训练摘要：`experiments/l20-d24-swanlab-20260806/logs/base-final.md`、`experiments/l20-d24-swanlab-20260806/logs/sft-final.md`、`experiments/l20-d24-swanlab-20260806/logs/sft-v2-eval.md`、`experiments/l20-d24-swanlab-20260806/logs/rl-eval.md`。
-- 统一指标：`experiments/l20-d24-swanlab-20260806/logs/rl-chat-eval.csv`、`experiments/l20-d24-swanlab-20260806/logs/rl-base-protocol.csv` 及对应原始日志。
-- 完整方案与源码阅读：`docs/L20_SWANLAB_EXPERIMENT_PLAN.md`、`experiments/l20-d24-swanlab-20260806/source-notes/`、`experiments/l20-d24-swanlab-20260806/blog/drafts/`。
+- SFT v1 的监督损失正常收敛，但 Base BPB 和 CORE 同时退化，因此问题是分布遗忘，不是训练未收敛。
+- SFT v2 通过降低学习率、清除旧优化器动量和监控 Base BPB，在对话能力与基础能力之间取得更好的平衡。
+- RL 在 step 420 后收益趋于饱和，step 466 出现轻微末期退化，因此保留 step 420 作为当前 RL best。
+- FA3 与 SDPA 的两轮交叉测速中，当前 SDPA 路径平均吞吐高 3.19%、峰值显存低 10.88%；结果仅代表本模型、软件版本和 L20 配置。
 
-## 不可变约束
+训练配置与报告：
 
-- Git 操作只在 L20 执行。
-- 正式训练使用 BF16，不启用 FP8。
-- 未通过 8 卡 100-step 冒烟和 step 50 恢复验证，不启动 d24。
-- 数据、完整日志、SwanLab 原始目录和 checkpoint 保存在 CPFS，不进入 Git。
-- GitHub 保存配置、轻量指标、日志摘要、图表、哈希和报告。
+- Base：[`base-final.md`](experiments/l20-d24-swanlab-20260806/logs/base-final.md)
+- SFT v1：[`sft-final.md`](experiments/l20-d24-swanlab-20260806/logs/sft-final.md)、[`sft-probe.md`](experiments/l20-d24-swanlab-20260806/logs/sft-probe.md)
+- SFT v2：[`sft-v2-eval.md`](experiments/l20-d24-swanlab-20260806/logs/sft-v2-eval.md)
+- RL：[`rl-eval.md`](experiments/l20-d24-swanlab-20260806/logs/rl-eval.md)
+- Attention：[`attention-backend-benchmark.md`](experiments/l20-d24-swanlab-20260806/logs/attention-backend-benchmark.md)
+- 源码阅读与博客：[`source-notes/`](experiments/l20-d24-swanlab-20260806/source-notes/)、[`blog/drafts/`](experiments/l20-d24-swanlab-20260806/blog/drafts/)
 
-完整方案见 [docs/L20_SWANLAB_EXPERIMENT_PLAN.md](docs/L20_SWANLAB_EXPERIMENT_PLAN.md)。
+## 评测结果
+
+评测分为两套协议：Chat Eval 衡量指令、数学和代码能力；Base protocol Eval 衡量原始语言建模与 CORE 能力。两套协议的绝对分数不能直接互比。
+
+### Chat Eval
+
+统一使用 8×L20、BF16、PyTorch SDPA、temperature 0、单样本和完整测试集。
+
+| Checkpoint | ARC-Easy | ARC-Challenge | MMLU | GSM8K | HumanEval | ChatCORE |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| SFT v1 step 932 | 52.19% | 37.20% | 34.48% | 3.18% | 14.02% | 0.1647 |
+| SFT v2 step 932 | **61.41%** | **45.48%** | **36.36%** | 1.52% | **12.20%** | **0.2094** |
+| RL step 420 | 59.76% | 43.77% | 36.15% | **14.71%** | 3.66% | 0.2092 |
+| RL step 466 | 59.89% | 43.77% | 36.13% | 14.18% | 3.66% | 0.2084 |
+
+### Base protocol Eval
+
+BPB 越低越好，CORE 越高越好。
+
+| Checkpoint | Train BPB | Validation BPB | CORE |
+| --- | ---: | ---: | ---: |
+| Base step 11136 | **0.714492** | **0.712537** | 0.259960 |
+| SFT v1 step 932 | 0.858575 | 0.857091 | 0.227166 |
+| SFT v2 step 932 | 0.767192 | 0.765257 | **0.268461** |
+| RL step 420 | 0.951394 | 0.949457 | 0.258807 |
+| RL step 466 | 0.957429 | 0.955496 | 0.256442 |
+
+### 结论
+
+- Base 正式完整 CORE 为 `0.259960`，高于原版 README 给出的 GPT-2 参考值 `0.256525`；但本实验使用 L20，不能直接参加以 8×H100 训练时间计分的 speedrun 排名。
+- SFT v1 获得基础对话能力，但 Base validation BPB 上升 20.29%、CORE 下降 12.62%，存在明显遗忘。
+- SFT v2 的 ChatCORE 从 `0.1647` 提升到 `0.2094`，Base CORE 从 `0.227166` 恢复到 `0.268461`，是当前综合能力最均衡的 checkpoint。
+- RL step 420 将 GSM8K 从 `1.52%` 提升到 `14.71%`，但 HumanEval 降到 `3.66%`，Base validation BPB 也升至 `0.949457`；RL 是数学专项增强，并非无损的通用能力提升。
+
+### 评测记录
+
+| 对象 | Chat Eval | Base protocol Eval |
+| --- | --- | --- |
+| Base | — | [n8d4bcb1](https://swanlab.cn/@richliu0153/nanochat-lab/runs/n8d4bcb1) |
+| SFT v1 | [i239hpv4](https://swanlab.cn/@richliu0153/nanochat-lab/runs/i239hpv4) | [ln0ha6dv](https://swanlab.cn/@richliu0153/nanochat-lab/runs/ln0ha6dv) |
+| SFT v2 | [0p6h93ke](https://swanlab.cn/@richliu0153/nanochat-lab/runs/0p6h93ke) | [9ut6s28v](https://swanlab.cn/@richliu0153/nanochat-lab/runs/9ut6s28v) |
+| RL step 420/466 | [7v4ta558](https://swanlab.cn/@richliu0153/nanochat-lab/runs/7v4ta558) | [7v4ta558](https://swanlab.cn/@richliu0153/nanochat-lab/runs/7v4ta558) |
+
+轻量 CSV、原始日志摘要和 SHA256 均保存在 [`experiments/l20-d24-swanlab-20260806/logs/`](experiments/l20-d24-swanlab-20260806/logs/)。
