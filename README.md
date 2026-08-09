@@ -1,4 +1,4 @@
-# NanoChat 全流程训练实验
+# NanoChat：8×L20 全流程训练实验
 
 > Karpathy 原版项目说明保存在 [README.upstream.md](README.upstream.md)。本分支为 `experiment/l20-d24-swanlab-20260806`，实验配置、轻量日志和报告位于 [`experiments/l20-d24-swanlab-20260806/`](experiments/l20-d24-swanlab-20260806/)；模型权重与完整运行日志保留在 L20 的 CPFS。
 
@@ -69,6 +69,23 @@
 ## 评测结果
 
 评测分为两套协议：Chat Eval 衡量指令、数学和代码能力；Base protocol Eval 衡量原始语言建模与 CORE 能力。两套协议的绝对分数不能直接互比。
+
+### Time-to-GPT-2 CORE 对比
+
+原版 NanoChat leaderboard 以 8×H100 的训练时间和训练末尾 DCLM CORE 为计分依据。`base_train.py` 默认对每个 CORE 任务最多评测 500 条，本实验训练末尾使用相同的抽样上限，因此 CORE 分数可作能力参考；但硬件和 dtype 不同，L20 时间不能计入官方 speedrun 排名。
+
+| # | Time | Validation BPB | CORE | Description | Hardware |
+| --- | ---: | ---: | ---: | --- | --- |
+| 0 | 168 h | — | 0.2565 | Original OpenAI GPT-2 checkpoint | — |
+| 1 | 3.04 h | 0.74833 | 0.2585 | d24 baseline, slightly overtrained | 8×H100 |
+| 2 | 2.91 h | 0.74504 | 0.2578 | d26 slightly undertrained + FP8 | 8×H100 |
+| 3 | 2.76 h | 0.74645 | 0.2602 | Total batch size 1M tokens | 8×H100 |
+| 4 | 2.02 h | 0.71854 | 0.2571 | NVIDIA ClimbMix | 8×H100 |
+| 5 | 1.80 h | 0.71808 | **0.2690** | Autoresearch round 1 | 8×H100 |
+| 6 | **1.65 h** | 0.71800 | 0.2626 | Autoresearch round 2 | 8×H100 |
+| Experiment | 15.96 h | **0.699602** | **0.27082** | d24、ClimbMix、BF16、FA3，非官方排名 | 8×L20 |
+
+本实验 `0.27082` 是训练末尾每任务最多 500 条的 CORE；下方 Base protocol 表中的 `0.259960` 是独立评测全部样本的正式完整 CORE。二者评测样本数不同，不应直接互换。
 
 ### Chat Eval
 
