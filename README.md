@@ -64,6 +64,7 @@
 - SFT v2：[`sft-v2-eval.md`](experiments/l20-d24-swanlab-20260806/logs/sft-v2-eval.md)
 - RL：[`rl-eval.md`](experiments/l20-d24-swanlab-20260806/logs/rl-eval.md)
 - Attention：[`attention-backend-benchmark.md`](experiments/l20-d24-swanlab-20260806/logs/attention-backend-benchmark.md)
+- Checkpoint 清理：[`checkpoint-cleanup-20260811.md`](experiments/l20-d24-swanlab-20260806/logs/checkpoint-cleanup-20260811.md)
 - 源码阅读与博客：[`source-notes/`](experiments/l20-d24-swanlab-20260806/source-notes/)、[`blog/drafts/`](experiments/l20-d24-swanlab-20260806/blog/drafts/)
 
 ## 评测结果
