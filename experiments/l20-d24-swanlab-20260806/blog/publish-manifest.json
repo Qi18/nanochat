@@ -12,12 +12,25 @@
       "swanlab_runs": []
     },
     {
-      "title": "NanoChat 源码阅读：base_train.py 第一行“正经代码”为什么是一个环境变量",
+      "title": "NanoChat 源码阅读：base_train.py 第一行‘正经代码’为什么是一个环境变量",
       "status": "draft",
       "source": "blog/drafts/02-nanochat-expandable-segments.md",
       "url": null,
       "published_at": null,
       "swanlab_runs": []
+    },
+    {
+      "title": "NanoChat 源码阅读：base_train.py 如何串起一次完整预训练",
+      "status": "draft",
+      "source": "blog/drafts/03-nanochat-base-train-structure.md",
+      "url": null,
+      "published_at": null,
+      "swanlab_runs": [
+        {
+          "id": "7malxqoi",
+          "url": "https://swanlab.cn/@richliu0153/nanochat-lab/runs/7malxqoi"
+        }
+      ]
     }
   ]
 }

@@ -66,6 +66,7 @@
 - Attention：[`attention-backend-benchmark.md`](experiments/l20-d24-swanlab-20260806/logs/attention-backend-benchmark.md)
 - Checkpoint 清理：[`checkpoint-cleanup-20260811.md`](experiments/l20-d24-swanlab-20260806/logs/checkpoint-cleanup-20260811.md)
 - 源码阅读与博客：[`source-notes/`](experiments/l20-d24-swanlab-20260806/source-notes/)、[`blog/drafts/`](experiments/l20-d24-swanlab-20260806/blog/drafts/)
+- `base_train.py` 结构文章：[`03-nanochat-base-train-structure.md`](experiments/l20-d24-swanlab-20260806/blog/drafts/03-nanochat-base-train-structure.md)
 
 ## 评测结果
 
