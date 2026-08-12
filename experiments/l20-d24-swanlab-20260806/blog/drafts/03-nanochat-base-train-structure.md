@@ -1,6 +1,8 @@
 # NanoChat 源码阅读：`base_train.py` 如何串起一次完整预训练
 
-> 状态：实验后整理草稿
+> 状态：已发布
+> 发布地址：[Qi18 的技术笔记](https://qi18.github.io/posts/nanochat-base-train-structure/)
+> 发布日期：2026-08-12
 > 实验：`l20-d24-swanlab-20260806`
 > 源码版本：[`f5e012f`](https://github.com/Qi18/nanochat/blob/f5e012fc47dbc5b5da6e4b8765b66de8000a54b7/scripts/base_train.py)
 > 实验运行版本：`3126420e9662c87e299b6cf4c65398b5b8936696`

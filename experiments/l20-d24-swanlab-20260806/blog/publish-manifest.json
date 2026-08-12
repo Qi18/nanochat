@@ -1,7 +1,7 @@
 {
   "experiment_id": "l20-d24-swanlab-20260806",
   "git_commit": null,
-  "blog_platform": null,
+  "blog_platform": "GitHub Pages (Astro)",
   "articles": [
     {
       "title": "NanoChat 的数据集、Tokenizer 与 DataLoader",
@@ -21,10 +21,10 @@
     },
     {
       "title": "NanoChat 源码阅读：base_train.py 如何串起一次完整预训练",
-      "status": "draft",
+      "status": "published",
       "source": "blog/drafts/03-nanochat-base-train-structure.md",
-      "url": null,
-      "published_at": null,
+      "url": "https://qi18.github.io/posts/nanochat-base-train-structure/",
+      "published_at": "2026-08-12",
       "swanlab_runs": [
         {
           "id": "7malxqoi",
